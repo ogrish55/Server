@@ -15,7 +15,7 @@ namespace Host
 
             Console.WriteLine("*** Console based host ***");
 
-            using (ServiceHost serviceHost = new ServiceHost(typeof(Operations)))
+            using (ServiceHost serviceHost = new ServiceHost(typeof(ProductService)))
             {
                 // Open the host ans start listening for incoming calls
                 serviceHost.Open();
