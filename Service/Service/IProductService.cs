@@ -19,6 +19,6 @@ namespace Service
         void DeleteProduct(int productId);
 
         [OperationContract]
-        void UpdateProduct(int productId);
+        void UpdateProduct(Product product);
     }
 }
