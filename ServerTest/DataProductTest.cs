@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -69,7 +70,7 @@ namespace ServerTest
             int rowsAffected;
 
             //Act
-            rowsAffected = dataProduct.DeleteProduct(5);
+            rowsAffected = dataProduct.DeleteProduct(8);
 
             //Assert
             Assert.IsTrue(rowsAffected >= 1, "Rows affected " + rowsAffected);
@@ -80,7 +81,7 @@ namespace ServerTest
         {
             //Arrange
             DataProduct dataProduct = new DataProduct();
-            Product product = dataProduct.GetProductById(5);
+            Product product = dataProduct.GetProductById(6);
             int rowsAffected;
 
             //Act
@@ -89,6 +90,19 @@ namespace ServerTest
 
             //Assert
             Assert.IsTrue(rowsAffected >= 1, "Rows affected " + rowsAffected + product.Name);
+        }
+
+        [TestMethod]
+        public void TestGetAllProducts()
+        {
+            //Arrange
+            DataProduct dataProduct = new DataProduct();
+
+            //Act
+            List<Product> products = (List<Product>) dataProduct.GetAllProducts();
+
+            //Assert
+            Assert.IsTrue(products.Count >= 1, "Number of products in list: " + products.Count);
         }
     }
 }

@@ -34,11 +34,39 @@ namespace Service.Data
             return rowsAffected;
         }
 
+        public IEnumerable<Product> GetAllProducts()
+        {
+            List<Product> products = new List<Product>();
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmdGetAllProducts = connection.CreateCommand())
+                {
+                    cmdGetAllProducts.CommandText = "SELECT productId, name, price, description FROM Product";
+                    SqlDataReader productsReader = cmdGetAllProducts.ExecuteReader();
+
+                    while (productsReader.Read())
+                    {
+                        Product product = new Product();
+                        product.Name = productsReader.GetString(productsReader.GetOrdinal("name"));
+                        product.Description = productsReader.GetString(productsReader.GetOrdinal("description"));
+                        product.Price = productsReader.GetDecimal(productsReader.GetOrdinal("price"));
+                        product.ProdutId = productsReader.GetInt32(productsReader.GetOrdinal("productId"));
+
+                        products.Add(product);
+                    }
+                }
+            }
+            return products;
+        }
+
         public Product GetProductById(int productId)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
+
                 using (SqlCommand cmdGetProductById = connection.CreateCommand())
                 {
                     Product product = new Product();
@@ -53,7 +81,6 @@ namespace Service.Data
                         product.Price = productReader.GetDecimal(productReader.GetOrdinal("price"));
                         product.ProdutId = productReader.GetInt32(productReader.GetOrdinal("productId"));
                     }
-
                     return product;
                 }
             }
@@ -92,8 +119,8 @@ namespace Service.Data
 
                     rowsAffected = cmdUpdateProduct.ExecuteNonQuery();
                 }
-                return rowsAffected;
             }
+            return rowsAffected;
         }
     }
 }

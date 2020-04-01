@@ -39,5 +39,11 @@ namespace Service
             return product;
         }
 
+        public IEnumerable<Product> GetAllProducts()
+        {
+            IEnumerable<Product> products = productControl.GetAllProducts();
+            return products;
+        }
+
     }
 }
