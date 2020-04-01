@@ -23,5 +23,8 @@ namespace Service
 
         [OperationContract]
         Product GetProductById(int productId);
+
+        [OperationContract]
+        IEnumerable<Product> GetAllProducts();
     }
 }

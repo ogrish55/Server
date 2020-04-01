@@ -36,5 +36,11 @@ namespace Service.Control
             Product product = dataProduct.GetProductById(productId);
             return product;
         }
+
+        public IEnumerable<Product> GetAllProducts()
+        {
+            IEnumerable<Product> products = dataProduct.GetAllProducts();
+            return products;
+        }
     }
 }
