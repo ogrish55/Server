@@ -32,5 +32,12 @@ namespace Service
         {
             productControl.UpdateProduct(product);
         }
+
+        public Product GetProductById(int productId)
+        {
+            Product product = productControl.GetProductById(productId);
+            return product;
+        }
+
     }
 }

@@ -20,5 +20,8 @@ namespace Service
 
         [OperationContract]
         void UpdateProduct(Product product);
+
+        [OperationContract]
+        Product GetProductById(int productId);
     }
 }

@@ -11,6 +11,7 @@ namespace Service.Data
     {
         void InsertProduct(Product product);
         int DeleteProduct(int productId);
-        void UpdateProduct(Product product);
+        int UpdateProduct(Product product);
+        Product GetProductById(int productId);
     }
 }

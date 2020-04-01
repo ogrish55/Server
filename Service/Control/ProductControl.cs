@@ -16,19 +16,25 @@ namespace Service.Control
             dataProduct = new DataProduct();
         }
 
-        internal void DeleteProduct(int productId)
+        public void DeleteProduct(int productId)
         {
-            throw new NotImplementedException();
+            dataProduct.DeleteProduct(productId);
         }
 
-        internal void InsertProduct(Product product)
+        public void InsertProduct(Product product)
         {
-            throw new NotImplementedException();
+            dataProduct.InsertProduct(product);
         }
 
-        internal void UpdateProduct(Product product)
+        public void UpdateProduct(Product product)
         {
-            throw new NotImplementedException();
+            dataProduct.UpdateProduct(product);
+        }
+
+        public Product GetProductById(int productId)
+        {
+            Product product = dataProduct.GetProductById(productId);
+            return product;
         }
     }
 }

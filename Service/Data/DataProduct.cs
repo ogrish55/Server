@@ -34,6 +34,30 @@ namespace Service.Data
             return rowsAffected;
         }
 
+        public Product GetProductById(int productId)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand cmdGetProductById = connection.CreateCommand())
+                {
+                    Product product = new Product();
+                    cmdGetProductById.CommandText = "SELECT productId, name, price, description FROM Product WHERE productId = @productId";
+                    cmdGetProductById.Parameters.AddWithValue("productId", productId);
+                    SqlDataReader productReader = cmdGetProductById.ExecuteReader();
+
+                    while (productReader.Read())
+                    {
+                        product.Name = productReader.GetString(productReader.GetOrdinal("name"));
+                        product.Description = productReader.GetString(productReader.GetOrdinal("description"));
+                        product.Price = productReader.GetDecimal(productReader.GetOrdinal("price"));
+                        product.ProdutId = productReader.GetInt32(productReader.GetOrdinal("productId"));
+                    }
+
+                    return product;
+                }
+            }
+        }
+
         public void InsertProduct(Product product)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -51,8 +75,9 @@ namespace Service.Data
             }
         }
 
-        public void UpdateProduct(Product product)
+        public int UpdateProduct(Product product)
         {
+            int rowsAffected;
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -63,9 +88,10 @@ namespace Service.Data
                     cmdUpdateProduct.Parameters.AddWithValue("price", product.Price);
                     cmdUpdateProduct.Parameters.AddWithValue("description", product.Description);
 
-                    cmdUpdateProduct.ExecuteNonQuery();
+                    rowsAffected = cmdUpdateProduct.ExecuteNonQuery();
                 }
             }
+            return rowsAffected;
         }
     }
 }

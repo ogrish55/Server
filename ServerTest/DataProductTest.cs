@@ -74,5 +74,21 @@ namespace ServerTest
             //Assert
             Assert.IsTrue(rowsAffected >= 1, "Rows affected " + rowsAffected);
         }
+
+        [TestMethod]
+        public void TestUpdateProdut()
+        {
+            //Arrange
+            DataProduct dataProduct = new DataProduct();
+            Product product = dataProduct.GetProductById(5);
+            int rowsAffected;
+
+            //Act
+            product.Name = "SSD harddisk";
+            rowsAffected = dataProduct.UpdateProduct(product);
+
+            //Assert
+            Assert.IsTrue(rowsAffected >= 1, "Rows affected " + rowsAffected);
+        }
     }
 }
