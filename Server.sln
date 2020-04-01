@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host", "Host\Host.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{82F18B31-4680-4B68-993E-680C4BF9D156}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerTest", "ServerTest\ServerTest.csproj", "{A526CC43-51EA-443D-9709-1990C2F90996}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceTest", "ServerTest\ServiceTest.csproj", "{A526CC43-51EA-443D-9709-1990C2F90996}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
