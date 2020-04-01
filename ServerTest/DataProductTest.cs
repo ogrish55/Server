@@ -69,7 +69,7 @@ namespace ServerTest
             int rowsAffected;
 
             //Act
-            rowsAffected = dataProduct.DeleteProduct(4);
+            rowsAffected = dataProduct.DeleteProduct(5);
 
             //Assert
             Assert.IsTrue(rowsAffected >= 1, "Rows affected " + rowsAffected);
@@ -88,7 +88,7 @@ namespace ServerTest
             rowsAffected = dataProduct.UpdateProduct(product);
 
             //Assert
-            Assert.IsTrue(rowsAffected >= 1, "Rows affected " + rowsAffected);
+            Assert.IsTrue(rowsAffected >= 1, "Rows affected " + rowsAffected + product.Name);
         }
     }
 }

@@ -38,6 +38,7 @@ namespace Service.Data
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
+                connection.Open();
                 using (SqlCommand cmdGetProductById = connection.CreateCommand())
                 {
                     Product product = new Product();
@@ -87,11 +88,12 @@ namespace Service.Data
                     cmdUpdateProduct.Parameters.AddWithValue("name", product.Name);
                     cmdUpdateProduct.Parameters.AddWithValue("price", product.Price);
                     cmdUpdateProduct.Parameters.AddWithValue("description", product.Description);
+                    cmdUpdateProduct.Parameters.AddWithValue("productId", product.ProdutId);
 
                     rowsAffected = cmdUpdateProduct.ExecuteNonQuery();
                 }
+                return rowsAffected;
             }
-            return rowsAffected;
         }
     }
 }
