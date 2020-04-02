@@ -42,7 +42,6 @@ namespace Service
 
         public IEnumerable<ServiceProduct> GetAllProducts()
         {
-            Thread.Sleep(5000);
             IEnumerable<ServiceProduct> products = productControl.GetAllProducts();
             return products;
         }
