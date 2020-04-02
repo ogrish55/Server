@@ -20,7 +20,7 @@ namespace Service.Model
         public string Description { get; set; }
         public override string ToString()
         {
-            return $"{ProductId} {Name} ({Price}) ({Description})";
+            return $"{ProductId} {Name} {Price} ({Description})";
         }
     }
 }
