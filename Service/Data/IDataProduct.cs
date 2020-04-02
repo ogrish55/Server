@@ -9,10 +9,10 @@ namespace Service.Data
 {
     public interface IDataProduct
     {
-        void InsertProduct(Product product);
+        void InsertProduct(ServiceProduct product);
         int DeleteProduct(int productId);
-        int UpdateProduct(Product product);
-        Product GetProductById(int productId);
-        IEnumerable<Product> GetAllProducts();
+        int UpdateProduct(ServiceProduct product);
+        ServiceProduct GetProductById(int productId);
+        IEnumerable<ServiceProduct> GetAllProducts();
     }
 }

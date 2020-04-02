@@ -13,18 +13,18 @@ namespace Service
     public interface IProductService
     {
         [OperationContract]
-        void InsertProduct(Product product);
+        void InsertProduct(ServiceProduct product);
 
         [OperationContract]
         void DeleteProduct(int productId);
 
         [OperationContract]
-        void UpdateProduct(Product product);
+        void UpdateProduct(ServiceProduct product);
 
         [OperationContract]
-        Product GetProductById(int productId);
+        ServiceProduct GetProductById(int productId);
 
         [OperationContract]
-        IEnumerable<Product> GetAllProducts();
+        IEnumerable<ServiceProduct> GetAllProducts();
     }
 }

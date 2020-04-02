@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Threading;
 
 namespace Service
 {
@@ -23,25 +24,26 @@ namespace Service
             productControl.DeleteProduct(productId);
         }
 
-        public void InsertProduct(Product product)
+        public void InsertProduct(ServiceProduct product)
         {
             productControl.InsertProduct(product);
         }
 
-        public void UpdateProduct(Product product)
+        public void UpdateProduct(ServiceProduct product)
         {
             productControl.UpdateProduct(product);
         }
 
-        public Product GetProductById(int productId)
+        public ServiceProduct GetProductById(int productId)
         {
-            Product product = productControl.GetProductById(productId);
+            ServiceProduct product = productControl.GetProductById(productId);
             return product;
         }
 
-        public IEnumerable<Product> GetAllProducts()
+        public IEnumerable<ServiceProduct> GetAllProducts()
         {
-            IEnumerable<Product> products = productControl.GetAllProducts();
+            Thread.Sleep(5000);
+            IEnumerable<ServiceProduct> products = productControl.GetAllProducts();
             return products;
         }
 

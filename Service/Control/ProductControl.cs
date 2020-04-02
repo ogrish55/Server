@@ -21,25 +21,25 @@ namespace Service.Control
             dataProduct.DeleteProduct(productId);
         }
 
-        public void InsertProduct(Product product)
+        public void InsertProduct(ServiceProduct product)
         {
             dataProduct.InsertProduct(product);
         }
 
-        public void UpdateProduct(Product product)
+        public void UpdateProduct(ServiceProduct product)
         {
             dataProduct.UpdateProduct(product);
         }
 
-        public Product GetProductById(int productId)
+        public ServiceProduct GetProductById(int productId)
         {
-            Product product = dataProduct.GetProductById(productId);
+            ServiceProduct product = dataProduct.GetProductById(productId);
             return product;
         }
 
-        public IEnumerable<Product> GetAllProducts()
+        public IEnumerable<ServiceProduct> GetAllProducts()
         {
-            IEnumerable<Product> products = dataProduct.GetAllProducts();
+            IEnumerable<ServiceProduct> products = dataProduct.GetAllProducts();
             return products;
         }
     }
