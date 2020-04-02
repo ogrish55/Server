@@ -34,9 +34,9 @@ namespace Service.Data
             return rowsAffected;
         }
 
-        public IEnumerable<Product> GetAllProducts()
+        public IEnumerable<ServiceProduct> GetAllProducts()
         {
-            List<Product> products = new List<Product>();
+            List<ServiceProduct> products = new List<ServiceProduct>();
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -48,7 +48,7 @@ namespace Service.Data
 
                     while (productsReader.Read())
                     {
-                        Product product = new Product();
+                        ServiceProduct product = new ServiceProduct();
                         product.Name = productsReader.GetString(productsReader.GetOrdinal("name"));
                         product.Description = productsReader.GetString(productsReader.GetOrdinal("description"));
                         product.Price = productsReader.GetDecimal(productsReader.GetOrdinal("price"));
@@ -61,7 +61,7 @@ namespace Service.Data
             return products;
         }
 
-        public Product GetProductById(int productId)
+        public ServiceProduct GetProductById(int productId)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -69,7 +69,7 @@ namespace Service.Data
 
                 using (SqlCommand cmdGetProductById = connection.CreateCommand())
                 {
-                    Product product = new Product();
+                    ServiceProduct product = new ServiceProduct();
                     cmdGetProductById.CommandText = "SELECT productId, name, price, description FROM Product WHERE productId = @productId";
                     cmdGetProductById.Parameters.AddWithValue("productId", productId);
                     SqlDataReader productReader = cmdGetProductById.ExecuteReader();
@@ -86,7 +86,7 @@ namespace Service.Data
             }
         }
 
-        public void InsertProduct(Product product)
+        public void InsertProduct(ServiceProduct product)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -103,7 +103,7 @@ namespace Service.Data
             }
         }
 
-        public int UpdateProduct(Product product)
+        public int UpdateProduct(ServiceProduct product)
         {
             int rowsAffected;
             using (SqlConnection connection = new SqlConnection(_connectionString))

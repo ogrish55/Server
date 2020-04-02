@@ -41,7 +41,7 @@ namespace ServerTest
         {
             //Arrange
             DataProduct dataProduct = new DataProduct();
-            Product product = new Product();
+            ServiceProduct product = new ServiceProduct();
             product.Name = "Grafikkort";
             product.Price = 1998;
             product.Description = "For at få den bedste spiloplevelse er det vigtigt med et godt grafikkort";
@@ -81,7 +81,7 @@ namespace ServerTest
         {
             //Arrange
             DataProduct dataProduct = new DataProduct();
-            Product product = dataProduct.GetProductById(6);
+            ServiceProduct product = dataProduct.GetProductById(6);
             int rowsAffected;
 
             //Act
@@ -99,7 +99,7 @@ namespace ServerTest
             DataProduct dataProduct = new DataProduct();
 
             //Act
-            List<Product> products = (List<Product>) dataProduct.GetAllProducts();
+            List<ServiceProduct> products = (List<ServiceProduct>) dataProduct.GetAllProducts();
 
             //Assert
             Assert.IsTrue(products.Count >= 1, "Number of products in list: " + products.Count);

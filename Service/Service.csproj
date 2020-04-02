@@ -59,7 +59,7 @@
     <Compile Include="Control\ProductControl.cs" />
     <Compile Include="Data\DataProduct.cs" />
     <Compile Include="Data\IDataProduct.cs" />
-    <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\ServiceProduct.cs" />
     <Compile Include="Service\IProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\ProductService.cs" />
