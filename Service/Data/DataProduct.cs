@@ -52,7 +52,7 @@ namespace Service.Data
                         product.Name = productsReader.GetString(productsReader.GetOrdinal("name"));
                         product.Description = productsReader.GetString(productsReader.GetOrdinal("description"));
                         product.Price = productsReader.GetDecimal(productsReader.GetOrdinal("price"));
-                        product.ProdutId = productsReader.GetInt32(productsReader.GetOrdinal("productId"));
+                        product.ProductId = productsReader.GetInt32(productsReader.GetOrdinal("productId"));
 
                         products.Add(product);
                     }
@@ -79,7 +79,7 @@ namespace Service.Data
                         product.Name = productReader.GetString(productReader.GetOrdinal("name"));
                         product.Description = productReader.GetString(productReader.GetOrdinal("description"));
                         product.Price = productReader.GetDecimal(productReader.GetOrdinal("price"));
-                        product.ProdutId = productReader.GetInt32(productReader.GetOrdinal("productId"));
+                        product.ProductId = productReader.GetInt32(productReader.GetOrdinal("productId"));
                     }
                     return product;
                 }
@@ -115,7 +115,7 @@ namespace Service.Data
                     cmdUpdateProduct.Parameters.AddWithValue("name", product.Name);
                     cmdUpdateProduct.Parameters.AddWithValue("price", product.Price);
                     cmdUpdateProduct.Parameters.AddWithValue("description", product.Description);
-                    cmdUpdateProduct.Parameters.AddWithValue("productId", product.ProdutId);
+                    cmdUpdateProduct.Parameters.AddWithValue("productId", product.ProductId);
 
                     rowsAffected = cmdUpdateProduct.ExecuteNonQuery();
                 }

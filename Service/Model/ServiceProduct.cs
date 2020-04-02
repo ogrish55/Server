@@ -11,12 +11,16 @@ namespace Service.Model
     public class ServiceProduct
     {
         [DataMember]
-        public int ProdutId { get; set; }
+        public int ProductId { get; set; }
         [DataMember]
         public string Name { get; set; }
         [DataMember]
         public decimal Price { get; set; }
         [DataMember]
         public string Description { get; set; }
+        public override string ToString()
+        {
+            return $"{ProductId} {Name} {Price} ({Description})";
+        }
     }
 }
