@@ -57,11 +57,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Control\ProductControl.cs" />
+    <Compile Include="Control\ProductLineControl.cs" />
     <Compile Include="Data\DataProduct.cs" />
+    <Compile Include="Data\DataProductLine.cs" />
     <Compile Include="Data\IDataProduct.cs" />
+    <Compile Include="Data\IDataProductLine.cs" />
     <Compile Include="Model\ServiceProduct.cs" />
+    <Compile Include="Model\ServiceProductLine.cs" />
+    <Compile Include="Service\IProductLineService.cs" />
     <Compile Include="Service\IProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\ProductLineService.cs" />
     <Compile Include="Service\ProductService.cs" />
   </ItemGroup>
   <ItemGroup>
