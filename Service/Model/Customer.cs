@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 namespace Service.Model
 {
     [DataContract]
-    public class ServiceProductLine
+    public class Customer
     {
         [DataMember]
-        public int ProductLineId { get; set; }
+        public int CustomerId { get; set; }
         [DataMember]
-        public int Amount { get; set; }
+        public string Name { get; set; }
         [DataMember]
-        public int SubTotal { get; set; }
+        public string Address { get; set; }
         [DataMember]
-        public int OrderId { get; set; }
+        public int ZipCode { get; set; }
         [DataMember]
-        public int ProductId { get; set; }
+        public int PhoneNo { get; set; }
     }
 }
