@@ -9,8 +9,8 @@ namespace Service.Data
 {
     public interface IDataProductLine
     {
-        void UpdateProductProductLine(ServiceProductLine serviceProductLine);
+        int UpdateProductLine(ServiceProductLine serviceProductLine);
         void InsertProductLine(ServiceProductLine serviceProductLine);
-        void DeleteProductLine(int productLineId);
+        int DeleteProductLine(int productLineId);
     }
 }

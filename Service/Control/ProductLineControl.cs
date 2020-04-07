@@ -18,7 +18,7 @@ namespace Service.Control
         }
         public void UpdateProductProductLine(ServiceProductLine serviceProductLine)
         {
-            dataProductLine.UpdateProductProductLine(serviceProductLine);
+            dataProductLine.UpdateProductLine(serviceProductLine);
         }
 
         public void InsertProductLine(ServiceProductLine serviceProductLine)

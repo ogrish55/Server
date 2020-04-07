@@ -34,7 +34,7 @@ namespace Service.Data
             return rowsAffected;
         }
 
-        public void InsertProductLine(ServiceProductLine productLine)
+        public void InsertProductLine(ServiceProductLine serviceProductLine)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -42,17 +42,17 @@ namespace Service.Data
                 using (SqlCommand cmdInsertProductLine = connection.CreateCommand())
                 {
                     cmdInsertProductLine.CommandText = "INSERT INTO ProductLine (amount, subTotal, orderId, productId) VALUES (@amount, @subTotal, @orderId, @productId)";
-                    cmdInsertProductLine.Parameters.AddWithValue("amount", productLine.Amount);
-                    cmdInsertProductLine.Parameters.AddWithValue("subTotal", productLine.SubTotal);
-                    cmdInsertProductLine.Parameters.AddWithValue("orderId", productLine.OrderId);
-                    cmdInsertProductLine.Parameters.AddWithValue("productId", productLine.ProductId);
+                    cmdInsertProductLine.Parameters.AddWithValue("amount", serviceProductLine.Amount);
+                    cmdInsertProductLine.Parameters.AddWithValue("subTotal", serviceProductLine.SubTotal);
+                    cmdInsertProductLine.Parameters.AddWithValue("orderId", serviceProductLine.OrderId);
+                    cmdInsertProductLine.Parameters.AddWithValue("productId", serviceProductLine.ProductId);
 
                     cmdInsertProductLine.ExecuteNonQuery();
                 }
             }
         }
 
-        public int UpdateProductLine(ServiceProductLine productLine)
+        public int UpdateProductLine(ServiceProductLine serviceProductLine)
         {
             int rowsAffected;
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -61,9 +61,9 @@ namespace Service.Data
                 using (SqlCommand cmdUpdateProductLine = connection.CreateCommand())
                 {
                     cmdUpdateProductLine.CommandText = "UPDATE ProductLine SET amount = @amount, subTotal = @subTotal WHERE productLineId = @productLineId";
-                    cmdUpdateProductLine.Parameters.AddWithValue("amount", productLine.Amount);
-                    cmdUpdateProductLine.Parameters.AddWithValue("subTotal", productLine.SubTotal);
-                    cmdUpdateProductLine.Parameters.AddWithValue("productLineId", productLine.ProductLineId);
+                    cmdUpdateProductLine.Parameters.AddWithValue("amount", serviceProductLine.Amount);
+                    cmdUpdateProductLine.Parameters.AddWithValue("subTotal", serviceProductLine.SubTotal);
+                    cmdUpdateProductLine.Parameters.AddWithValue("productLineId", serviceProductLine.ProductLineId);
                     rowsAffected = cmdUpdateProductLine.ExecuteNonQuery();
                 }
             }
