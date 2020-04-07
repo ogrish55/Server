@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.Service
+namespace Service
 {
     public class CustomerService : ICustomerService
     {
@@ -21,12 +21,12 @@ namespace Service.Service
             customerControl.DeleteCustomer(customerId);
         }
 
-        public void InsertCustomer(Customer customer)
+        public void InsertCustomer(ServiceCustomer customer)
         {
             customerControl.InsertCustomer(customer);
         }
 
-        public void UpdateCustomer(Customer customer)
+        public void UpdateCustomer(ServiceCustomer customer)
         {
             customerControl.UpdateCustomer(customer);
         }

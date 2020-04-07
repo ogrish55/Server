@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Service.Control;
 using Service.Model;
 
-namespace Service.Service
+namespace Service
 {
     public class ProductLineService : IProductLineService
     {

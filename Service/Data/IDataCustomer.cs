@@ -9,8 +9,8 @@ namespace Service.Data
 {
     public interface IDataCustomer
     {
-        void InsertCustomer(Customer customer);
+        void InsertCustomer(ServiceCustomer customer);
         int DeleteCustomer(int customerId);
-        int UpdateCustomer(Customer customer);
+        int UpdateCustomer(ServiceCustomer customer);
     }
 }

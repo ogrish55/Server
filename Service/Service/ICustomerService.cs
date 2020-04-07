@@ -4,13 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ServiceModel;
+using System.Runtime.Serialization;
 
-namespace Service.Service
+namespace Service
 {
+    [ServiceContract]
     public interface ICustomerService
     {
-        void InsertCustomer(Customer customer);
-        void UpdateCustomer(Customer customer);
+        [OperationContract]
+        void InsertCustomer(ServiceCustomer customer);
+        [OperationContract]
+        void UpdateCustomer(ServiceCustomer customer);
+        [OperationContract]
         void DeleteCustomer(int customerId);
 
     }

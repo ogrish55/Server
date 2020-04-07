@@ -33,7 +33,7 @@ namespace Service.Data
             return rowsAffected;
         }
 
-        public void InsertCustomer(Customer customer)
+        public void InsertCustomer(ServiceCustomer customer)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -51,7 +51,7 @@ namespace Service.Data
             }
         }
 
-        public int UpdateCustomer(Customer customer)
+        public int UpdateCustomer(ServiceCustomer customer)
         {
             int rowsAffected;
             using (SqlConnection connection = new SqlConnection(_connectionString))

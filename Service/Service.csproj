@@ -68,7 +68,7 @@
     <Compile Include="Data\IDataCustomerOrder.cs" />
     <Compile Include="Data\IDataProduct.cs" />
     <Compile Include="Data\IDataProductLine.cs" />
-    <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\ServiceCustomer.cs" />
     <Compile Include="Model\ServiceCustomerOrder.cs" />
     <Compile Include="Model\ServiceProduct.cs" />
     <Compile Include="Model\ServiceProductLine.cs" />

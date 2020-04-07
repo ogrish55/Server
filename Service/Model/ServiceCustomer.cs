@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Service.Model
 {
     [DataContract]
-    public class Customer
+    public class ServiceCustomer
     {
         [DataMember]
         public int CustomerId { get; set; }
