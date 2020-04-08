@@ -22,6 +22,8 @@ namespace Service.Model
         public int DiscountId { get; set; }
         [DataMember]
         public string PaymentMethod { get; set; }
+        [DataMember]
+        public int OrderId { get; set; }
 
     }
 }
