@@ -21,6 +21,26 @@ namespace Service
             customerOrderControl.DeleteOrder(orderId);
         }
 
+        public IEnumerable<ServiceCustomerOrder> GetActiveOrders()
+        {
+            return customerOrderControl.GetActiveOrders();
+        }
+
+        public IEnumerable<ServiceCustomerOrder> GetAllOrders()
+        {
+            return customerOrderControl.GetAllOrders();
+        }
+
+        public IEnumerable<ServiceCustomerOrder> GetCancelledOrders()
+        {
+            return customerOrderControl.GetCancelledOrders();
+        }
+
+        public ServiceCustomerOrder GetOrder(int customerOrderId)
+        {
+            return customerOrderControl.GetOrder(customerOrderId);
+        }
+
         public void InsertOrder(ServiceCustomerOrder order)
         {
             customerOrderControl.InsertOrder(order);

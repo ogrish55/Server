@@ -45,7 +45,7 @@ namespace Service.Data
                     cmdInsertProductLine.Parameters.AddWithValue("amount", serviceProductLine.Amount);
                     cmdInsertProductLine.Parameters.AddWithValue("subTotal", serviceProductLine.SubTotal);
                     cmdInsertProductLine.Parameters.AddWithValue("orderId", serviceProductLine.OrderId);
-                    cmdInsertProductLine.Parameters.AddWithValue("productId", serviceProductLine.ProductId);
+                    cmdInsertProductLine.Parameters.AddWithValue("productId", serviceProductLine.Product.ProductId);
 
                     cmdInsertProductLine.ExecuteNonQuery();
                 }

@@ -19,6 +19,6 @@ namespace Service.Model
         [DataMember]
         public int OrderId { get; set; }
         [DataMember]
-        public int ProductId { get; set; }
+        public ServiceProduct Product { get; set; }
     }
 }

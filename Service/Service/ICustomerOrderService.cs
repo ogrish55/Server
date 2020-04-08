@@ -20,5 +20,17 @@ namespace Service
         [OperationContract]
         void UpdateOrder(ServiceCustomerOrder order);
 
+        [OperationContract]
+        IEnumerable<ServiceCustomerOrder> GetAllOrders();
+
+        [OperationContract]
+        IEnumerable<ServiceCustomerOrder> GetCancelledOrders();
+
+        [OperationContract]
+        IEnumerable<ServiceCustomerOrder> GetActiveOrders();
+
+        [OperationContract]
+        ServiceCustomerOrder GetOrder(int customerOrderId);
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Service.Model;
+﻿using Service.Data;
+using Service.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +10,45 @@ namespace Service.Control
 {
     public class CustomerOrderControl
     {
-        internal void DeleteOrder(int orderId)
+        IDataCustomerOrder dataCustomerOrder;
+        public CustomerOrderControl()
         {
-            throw new NotImplementedException();
+            dataCustomerOrder = new DataCustomerOrder();
         }
 
-        internal void InsertOrder(ServiceCustomerOrder order)
+        public void DeleteOrder(int orderId)
         {
-            throw new NotImplementedException();
+            dataCustomerOrder.DeleteOrder(orderId);
         }
 
-        internal void UpdateOrder(ServiceCustomerOrder order)
+        public void InsertOrder(ServiceCustomerOrder order)
         {
-            throw new NotImplementedException();
+            dataCustomerOrder.InsertOrder(order);
+        }
+
+        public void UpdateOrder(ServiceCustomerOrder order)
+        {
+            dataCustomerOrder.UpdateOrder(order);
+        }
+
+        public IEnumerable<ServiceCustomerOrder> GetActiveOrders()
+        {
+            return dataCustomerOrder.GetActiveOrders();
+        }
+
+        public IEnumerable<ServiceCustomerOrder> GetAllOrders()
+        {
+            return dataCustomerOrder.GetAllOrders();
+        }
+
+        public IEnumerable<ServiceCustomerOrder> GetCancelledOrders()
+        {
+            return dataCustomerOrder.GetCancelledOrders();
+        }
+
+        public ServiceCustomerOrder GetOrder(int customerOrderId)
+        {
+            return dataCustomerOrder.GetOrder(customerOrderId);
         }
     }
 }
