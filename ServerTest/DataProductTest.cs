@@ -106,25 +106,25 @@ namespace ServerTest
             Assert.IsTrue(products.Count >= 1, "Number of products in list: " + products.Count);
         }
 
-        [TestMethod]
-        public void TestGetAmountOnProduct()
-        {
-            //Arrange
-            DataProduct dataProduct = new DataProduct();
-            ServiceProduct product = new ServiceProduct();
+        //[TestMethod]
+        //public void TestGetAmountOnProduct()
+        //{
+        //    //Arrange
+        //    DataProduct dataProduct = new DataProduct();
+        //    ServiceProduct product = new ServiceProduct();
             
-            product.Name = "Harddisk";
-            product.Price = 1234;
-            product.Description = "For at få den bedste spiloplevelse er det vigtigt med en god og hurtig harddisk";
-            product.AmountOnStock = 30;
+        //    product.Name = "Harddisk";
+        //    product.Price = 1234;
+        //    product.Description = "For at få den bedste spiloplevelse er det vigtigt med en god og hurtig harddisk";
+        //    product.AmountOnStock = 30;
 
-            //Act
-            int insertedId = dataProduct.InsertProduct(product);
-            var getInsertedProduct = dataProduct.GetProductById(insertedId);
+        //    //Act
+        //    int insertedId = dataProduct.InsertProduct(product);
+        //    var getInsertedProduct = dataProduct.GetProductById(insertedId);
 
-            //Assert
-            Assert.AreEqual(product.AmountOnStock, getInsertedProduct.AmountOnStock);
-        }
+        //    //Assert
+        //    Assert.AreEqual(product.AmountOnStock, getInsertedProduct.AmountOnStock);
+        //}
 
     }
 }

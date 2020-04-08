@@ -97,7 +97,7 @@ namespace Service.Data
                     cmdInsertProduct.Parameters.AddWithValue("name", product.Name);
                     cmdInsertProduct.Parameters.AddWithValue("price", product.Price);
                     cmdInsertProduct.Parameters.AddWithValue("description", product.Description);
-
+                    
                     cmdInsertProduct.ExecuteNonQuery();
                 }
             }
