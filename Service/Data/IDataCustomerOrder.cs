@@ -11,7 +11,7 @@ namespace Service.Data
     {
         int DeleteOrder(int orderId);
         void InsertOrder(ServiceCustomerOrder order);
-        void UpdateOrder(ServiceCustomerOrder order);
+        int UpdateOrder(ServiceCustomerOrder order);
         IEnumerable<ServiceCustomerOrder> GetActiveOrders();
         IEnumerable<ServiceCustomerOrder> GetAllOrders();
         IEnumerable<ServiceCustomerOrder> GetCancelledOrders();
