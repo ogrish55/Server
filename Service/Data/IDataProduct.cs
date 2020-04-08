@@ -13,6 +13,6 @@ namespace Service.Data
         int DeleteProduct(int productId);
         int UpdateProduct(ServiceProduct product);
         ServiceProduct GetProductById(int productId);
-        IEnumerable<ServiceProduct> GetAllProducts();
+        IEnumerable<ServiceProductLine> GetAllProducts();
     }
 }

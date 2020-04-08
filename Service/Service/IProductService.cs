@@ -25,6 +25,6 @@ namespace Service
         ServiceProduct GetProductById(int productId);
 
         [OperationContract]
-        IEnumerable<ServiceProduct> GetAllProducts();
+        IEnumerable<ServiceProductLine> GetAllProducts();
     }
 }

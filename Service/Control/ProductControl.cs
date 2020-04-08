@@ -37,9 +37,9 @@ namespace Service.Control
             return product;
         }
 
-        public IEnumerable<ServiceProduct> GetAllProducts()
+        public IEnumerable<ServiceProductLine> GetAllProducts()
         {
-            IEnumerable<ServiceProduct> products = dataProduct.GetAllProducts();
+            IEnumerable<ServiceProductLine> products = dataProduct.GetAllProducts();
             return products;
         }
     }

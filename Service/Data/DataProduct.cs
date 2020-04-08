@@ -34,9 +34,9 @@ namespace Service.Data
             return rowsAffected;
         }
 
-        public IEnumerable<ServiceProduct> GetAllProducts()
+        public IEnumerable<ServiceProductLine> GetAllProducts()
         {
-            List<ServiceProduct> products = new List<ServiceProduct>();
+            List<ServiceProductLine> products = new List<ServiceProductLine>();
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -53,8 +53,9 @@ namespace Service.Data
                         product.Description = productsReader.GetString(productsReader.GetOrdinal("description"));
                         product.Price = productsReader.GetDecimal(productsReader.GetOrdinal("price"));
                         product.ProductId = productsReader.GetInt32(productsReader.GetOrdinal("productId"));
-
-                        products.Add(product);
+                        ServiceProductLine productLine = new ServiceProductLine();
+                        productLine.product = product;
+                        products.Add(productLine);
                     }
                 }
             }

@@ -40,9 +40,9 @@ namespace Service
             return product;
         }
 
-        public IEnumerable<ServiceProduct> GetAllProducts()
+        public IEnumerable<ServiceProductLine> GetAllProducts()
         {
-            IEnumerable<ServiceProduct> products = productControl.GetAllProducts();
+            IEnumerable<ServiceProductLine> products = productControl.GetAllProducts();
             return products;
         }
 
