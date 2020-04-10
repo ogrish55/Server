@@ -93,10 +93,12 @@ namespace Service.Data
                 connection.Open();
                 using (SqlCommand cmdInsertProduct = connection.CreateCommand())
                 {
-                    cmdInsertProduct.CommandText = "INSERT INTO Product (name, price, description) VALUES (@name, @price, @description)";
+                    cmdInsertProduct.CommandText = "INSERT INTO Product (name, price, description, amountOnStock) VALUES (@name, @price, @description, @amountOnStock)";
                     cmdInsertProduct.Parameters.AddWithValue("name", product.Name);
                     cmdInsertProduct.Parameters.AddWithValue("price", product.Price);
                     cmdInsertProduct.Parameters.AddWithValue("description", product.Description);
+                    cmdInsertProduct.Parameters.AddWithValue("amountOnStock", product.AmountOnStock);
+                    
                     
                     cmdInsertProduct.ExecuteNonQuery();
                 }
