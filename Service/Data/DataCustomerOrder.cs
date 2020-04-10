@@ -127,13 +127,14 @@ namespace Service.Data
 
                 using (SqlCommand cmdGetOrder = connection.CreateCommand())
                 {
-                    ServiceCustomerOrder customerOrder = new ServiceCustomerOrder();
-                    cmdGetOrder.CommandText = "SELECT finalPrice, status, dateOrder, customerId, discountId, paymentMethhodId, orderId WHERE orderId = @orderId";
+                    ServiceCustomerOrder customerOrder = null;
+                    cmdGetOrder.CommandText = "SELECT finalPrice, status, dateOrder, customerId, discountId, paymentMethodId, orderId FROM CustomerOrder WHERE orderId = @orderId";
                     cmdGetOrder.Parameters.AddWithValue("orderId", customerOrderId);
                     SqlDataReader orderReader = cmdGetOrder.ExecuteReader();
 
                     while (orderReader.Read())
                     {
+                        customerOrder = new ServiceCustomerOrder();
                         customerOrder.FinalPrice = orderReader.GetDecimal(orderReader.GetOrdinal("finalPrice"));
                         customerOrder.Status = orderReader.GetString(orderReader.GetOrdinal("status"));
                         customerOrder.DateOrder = orderReader.GetDateTime(orderReader.GetOrdinal("dateOrder"));
