@@ -55,8 +55,20 @@ namespace Host
                             // Keep the service running until the Enter key is pressed
                             Console.WriteLine("The service is ready.");
 
-                            Console.WriteLine("Press the Enter key to terminate services.");
-                            Console.ReadLine();
+                            // DeliveryDescription
+                            using (ServiceHost deliveryDescriptionHost = new ServiceHost(typeof(DeliveryDescriptionService)))
+                            {
+                                // Open the host and start listening for incoming calls
+                                deliveryDescriptionHost.Open();
+                                DisplayHostInfo(deliveryDescriptionHost);
+
+                                // Keep the service running until the Enter key is pressed
+                                Console.WriteLine("The service is ready.");
+
+                                Console.WriteLine("Press the Enter key to terminate services.");
+                                Console.ReadLine();
+                            }
+
                         }
                     }
                 }
