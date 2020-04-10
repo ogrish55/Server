@@ -86,23 +86,23 @@ namespace Service.Data
             }
         }
 
-        public void InsertProduct(ServiceProduct product)
+        public int InsertProduct(ServiceProduct product)
         {
+            int insertedId = -1;
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 using (SqlCommand cmdInsertProduct = connection.CreateCommand())
                 {
-                    cmdInsertProduct.CommandText = "INSERT INTO Product (name, price, description, amountOnStock) VALUES (@name, @price, @description, @amountOnStock)";
+                    cmdInsertProduct.CommandText = "INSERT INTO Product (name, price, description) OUTPUT INSERTED.productId VALUES (@name, @price, @description)";
                     cmdInsertProduct.Parameters.AddWithValue("name", product.Name);
                     cmdInsertProduct.Parameters.AddWithValue("price", product.Price);
                     cmdInsertProduct.Parameters.AddWithValue("description", product.Description);
-                    cmdInsertProduct.Parameters.AddWithValue("amountOnStock", product.AmountOnStock);
-                    
-                    
-                    cmdInsertProduct.ExecuteNonQuery();
+
+                    insertedId = (int)cmdInsertProduct.ExecuteScalar();
                 }
             }
+            return insertedId;
         }
 
         public int UpdateProduct(ServiceProduct product)
