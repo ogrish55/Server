@@ -9,7 +9,7 @@ namespace Service.Data
 {
     public interface IDataCustomer
     {
-        void InsertCustomer(ServiceCustomer customer);
+        int InsertCustomer(ServiceCustomer customer);
         int DeleteCustomer(int customerId);
         int UpdateCustomer(ServiceCustomer customer);
     }

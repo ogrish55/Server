@@ -33,22 +33,24 @@ namespace Service.Data
             return rowsAffected;
         }
 
-        public void InsertCustomer(ServiceCustomer customer)
+        public int InsertCustomer(ServiceCustomer customer)
         {
+            int insertedId = -1;
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 using (SqlCommand cmdInsertCustomer = connection.CreateCommand())
                 {
-                    cmdInsertCustomer.CommandText = "INSERT INTO Customer (name, address, zipCode, phoneNo) VALUES (@name, @address, @zipCode, @phoneNo)";
+                    cmdInsertCustomer.CommandText = "INSERT INTO Customer (name, address, zipCode, phoneNo) OUTPUT INSERTED.customerId VALUES (@name, @address, @zipCode, @phoneNo)";
                     cmdInsertCustomer.Parameters.AddWithValue("name", customer.Name);
                     cmdInsertCustomer.Parameters.AddWithValue("address", customer.Address);
                     cmdInsertCustomer.Parameters.AddWithValue("zipCode", customer.ZipCode);
                     cmdInsertCustomer.Parameters.AddWithValue("phoneNo", customer.PhoneNo);
 
-                    cmdInsertCustomer.ExecuteNonQuery();
+                    insertedId = (int)cmdInsertCustomer.ExecuteScalar();
                 }
             }
+            return insertedId;
         }
 
         public int UpdateCustomer(ServiceCustomer customer)
