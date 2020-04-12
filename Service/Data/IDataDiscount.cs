@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace Service.Data
 {
-    interface IDataDiscount
+    public interface IDataDiscount
     {
         void InsertDiscount(ServiceDiscount discount);
         int DeleteDiscount(int discountId);
+        int GetDiscountByCode(string code);
     }
 }

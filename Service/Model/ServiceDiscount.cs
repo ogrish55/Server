@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Service.Model
 {
     [DataContract]
-    class ServiceDiscount
+    public class ServiceDiscount
     {
         [DataMember]
         public int DiscountId { get; set; }
@@ -17,6 +17,6 @@ namespace Service.Model
         public string DiscountCode { get; set; }
 
         [DataMember]
-        public decimal DiscountAmount { get; set; }
+        public int DiscountAmount { get; set; }
     }
 }
