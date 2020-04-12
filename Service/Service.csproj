@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Control\CustomerControl.cs" />
     <Compile Include="Control\CustomerOrderControl.cs" />
+    <Compile Include="Control\DiscountControl.cs" />
     <Compile Include="Control\ProductControl.cs" />
     <Compile Include="Control\ProductLineControl.cs" />
     <Compile Include="Data\DataCustomer.cs" />
@@ -66,15 +67,19 @@
     <Compile Include="Data\DataProductLine.cs" />
     <Compile Include="Data\IDataCustomer.cs" />
     <Compile Include="Data\IDataCustomerOrder.cs" />
+    <Compile Include="Data\IDataDiscount.cs" />
     <Compile Include="Data\IDataProduct.cs" />
     <Compile Include="Data\IDataProductLine.cs" />
     <Compile Include="Model\ServiceCustomer.cs" />
     <Compile Include="Model\ServiceCustomerOrder.cs" />
+    <Compile Include="Model\ServiceDiscount.cs" />
     <Compile Include="Model\ServiceProduct.cs" />
     <Compile Include="Model\ServiceProductLine.cs" />
     <Compile Include="Service\CustomerService.cs" />
+    <Compile Include="Service\DiscountService.cs" />
     <Compile Include="Service\ICustomerService.cs" />
     <Compile Include="Service\ICustomerOrderService.cs" />
+    <Compile Include="Service\IDiscountService.cs" />
     <Compile Include="Service\IProductLineService.cs" />
     <Compile Include="Service\IProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
