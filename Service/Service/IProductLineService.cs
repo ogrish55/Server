@@ -20,5 +20,19 @@ namespace Service
         [OperationContract]
         void UpdateProductLine(ServiceProductLine serviceProductLine);
 
+        [OperationContract]
+        void InsertProduct(ServiceProduct product);
+
+        [OperationContract]
+        void DeleteProduct(int productId);
+
+        [OperationContract]
+        void UpdateProduct(ServiceProduct product);
+
+        [OperationContract]
+        ServiceProduct GetProductById(int productId);
+
+        [OperationContract]
+        IEnumerable<ServiceProduct> GetAllProducts();
     }
 }

@@ -32,5 +32,24 @@ namespace Service
         [OperationContract]
         ServiceCustomerOrder GetOrder(int customerOrderId);
 
+        [OperationContract]
+        void InsertDeliveryDescription(ServiceDeliveryDescription deliveryDescription);
+
+        [OperationContract]
+        ServiceDeliveryDescription GetDeliveryDescriptionById(int deliveryId);
+
+        [OperationContract]
+        void UpdateDeliveryDescription(ServiceDeliveryDescription deliveryDescription);
+
+        [OperationContract]
+        void DeleteDeliveryDescription(int deliveryId);
+
+        [OperationContract]
+        void InsertDiscount(ServiceDiscount discount);
+        [OperationContract]
+        int DeleteDiscount(int discountId);
+        [OperationContract]
+        int GetDiscountByCode(string code);
+
     }
 }

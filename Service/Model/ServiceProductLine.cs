@@ -15,7 +15,7 @@ namespace Service.Model
         [DataMember]
         public int Amount { get; set; }
         [DataMember]
-        public int SubTotal { get; set; }
+        public decimal SubTotal { get; set; }
         [DataMember]
         public int OrderId { get; set; }
         [DataMember]
