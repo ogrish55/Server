@@ -14,67 +14,33 @@ namespace Host
         {
 
             Console.WriteLine("*** Console based host ***");
-
-            // ProductService
             using (ServiceHost serviceHost = new ServiceHost(typeof(ProductService)))
+            using (ServiceHost productLineHost = new ServiceHost(typeof(ProductLineService)))
+            using (ServiceHost customerOrderHost = new ServiceHost(typeof(CustomerOrderService)))
+            using (ServiceHost customerHost = new ServiceHost(typeof(CustomerService)))
+            using (ServiceHost deliveryDescriptionHost = new ServiceHost(typeof(DeliveryDescriptionService)))
             {
-                // Open the host ans start listening for incoming calls
+                // Open the hosts and start listening for incoming calls
                 serviceHost.Open();
+                productLineHost.Open();
+                customerOrderHost.Open();
+                customerHost.Open();
+                deliveryDescriptionHost.Open();
+
                 DisplayHostInfo(serviceHost);
+                DisplayHostInfo(productLineHost);
+                DisplayHostInfo(customerOrderHost);
+                DisplayHostInfo(customerHost);
+                DisplayHostInfo(deliveryDescriptionHost);
 
-                // Keep the service running until the Enter key is pressed
-                Console.WriteLine("The service is ready.");
+                Console.WriteLine("The services are ready.");
+                Console.WriteLine("Press any key to terminate");
+                Console.ReadLine();
 
-                //ProductLineService
-                using (ServiceHost productLineHost = new ServiceHost(typeof(ProductLineService)))
-                {
-                    // Open the host ans start listening for incoming calls
-                    productLineHost.Open();
-                    DisplayHostInfo(productLineHost);
-
-                    // Keep the service running until the Enter key is pressed
-                    Console.WriteLine("The service is ready.");
-
-                    // CustomerOrder
-                    using (ServiceHost customerOrderHost = new ServiceHost(typeof(CustomerOrderService)))
-                    {
-                        // Open the host ans start listening for incoming calls
-                        customerOrderHost.Open();
-                        DisplayHostInfo(customerOrderHost);
-
-                        // Keep the service running until the Enter key is pressed
-                        Console.WriteLine("The service is ready.");
-
-                        //CustomerService
-                        using (ServiceHost customerHost = new ServiceHost(typeof(CustomerService)))
-                        {
-                            // Open the host ans start listening for incoming calls
-                            customerHost.Open();
-                            DisplayHostInfo(customerHost);
-
-                            // Keep the service running until the Enter key is pressed
-                            Console.WriteLine("The service is ready.");
-
-                            // DeliveryDescription
-                            using (ServiceHost deliveryDescriptionHost = new ServiceHost(typeof(DeliveryDescriptionService)))
-                            {
-                                // Open the host and start listening for incoming calls
-                                deliveryDescriptionHost.Open();
-                                DisplayHostInfo(deliveryDescriptionHost);
-
-                                // Keep the service running until the Enter key is pressed
-                                Console.WriteLine("The service is ready.");
-
-                                Console.WriteLine("Press the Enter key to terminate services.");
-                                Console.ReadLine();
-                            }
-
-                        }
-                    }
-                }
             }
-
         }
+
+
 
         static void DisplayHostInfo(ServiceHost host)
         {
