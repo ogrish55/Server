@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Service.Data;
 using Service.Model;
@@ -26,6 +27,20 @@ namespace ServiceTest
 
             //Assert
             Assert.AreEqual("Cancelled", dataOrder.GetOrder(1).Status);
+        }
+
+        [TestMethod]
+        public void TestGetAllOrders()
+        {
+            // Arrange
+            DataCustomerOrder dataOrder = new DataCustomerOrder();
+
+
+            // Act
+            List<ServiceCustomerOrder> orders = (List<ServiceCustomerOrder>)dataOrder.GetAllOrders();
+
+            //Assert
+            Assert.IsTrue(orders.Count >= 1);
         }
     }
 }
