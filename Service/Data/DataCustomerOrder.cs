@@ -143,7 +143,7 @@ namespace Service.Data
                         customerOrder.DateOrder = orderReader.GetDateTime(orderReader.GetOrdinal("dateOrder"));
                         customerOrder.CustomerId = orderReader.GetInt32(orderReader.GetOrdinal("customerId"));
                         customerOrder.DiscountId = orderReader.GetInt32(orderReader.GetOrdinal("discountId"));
-                        customerOrder.PaymentMethod = orderReader.GetInt32(orderReader.GetOrdinal("paymentMethhodId"));
+                        customerOrder.PaymentMethod = orderReader.GetInt32(orderReader.GetOrdinal("paymentMethodId"));
                         customerOrder.OrderId = orderReader.GetInt32(orderReader.GetOrdinal("orderId"));
                     }
                     return customerOrder;
