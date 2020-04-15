@@ -14,24 +14,18 @@ namespace Host
         {
 
             Console.WriteLine("*** Console based host ***");
-            using (ServiceHost serviceHost = new ServiceHost(typeof(ProductService)))
             using (ServiceHost productLineHost = new ServiceHost(typeof(ProductLineService)))
             using (ServiceHost customerOrderHost = new ServiceHost(typeof(CustomerOrderService)))
             using (ServiceHost customerHost = new ServiceHost(typeof(CustomerService)))
-            using (ServiceHost deliveryDescriptionHost = new ServiceHost(typeof(DeliveryDescriptionService)))
             {
                 // Open the hosts and start listening for incoming calls
-                serviceHost.Open();
                 productLineHost.Open();
                 customerOrderHost.Open();
                 customerHost.Open();
-                deliveryDescriptionHost.Open();
 
-                DisplayHostInfo(serviceHost);
                 DisplayHostInfo(productLineHost);
                 DisplayHostInfo(customerOrderHost);
                 DisplayHostInfo(customerHost);
-                DisplayHostInfo(deliveryDescriptionHost);
 
                 Console.WriteLine("The services are ready.");
                 Console.WriteLine("Press any key to terminate");

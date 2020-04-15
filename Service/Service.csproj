@@ -77,22 +77,16 @@
     <Compile Include="Model\ServiceCustomer.cs" />
     <Compile Include="Model\ServiceCustomerOrder.cs" />
     <Compile Include="Model\ServiceDiscount.cs" />
-    <Compile Include="Service\DiscountService.cs" />
-    <Compile Include="Service\IDiscountService.cs" />
     <Compile Include="Model\ServiceDeliveryDescription.cs" />
     <Compile Include="Model\ServiceProduct.cs" />
     <Compile Include="Model\ServiceProductLine.cs" />
     <Compile Include="Service\CustomerService.cs" />
-    <Compile Include="Service\DeliveryDescriptionService.cs" />
     <Compile Include="Service\ICustomerService.cs" />
     <Compile Include="Service\ICustomerOrderService.cs" />
-    <Compile Include="Service\IDeliveryDescriptionService.cs" />
     <Compile Include="Service\IProductLineService.cs" />
-    <Compile Include="Service\IProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\CustomerOrderService.cs" />
     <Compile Include="Service\ProductLineService.cs" />
-    <Compile Include="Service\ProductService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
