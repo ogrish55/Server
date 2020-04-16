@@ -66,6 +66,11 @@ namespace Service
             return customerOrderControl.GetOrder(customerOrderId);
         }
 
+        public IEnumerable<PaymentMethod> GetPaymentMethods()
+        {
+            return customerOrderControl.GetPaymentMethods();
+        }
+
         public void InsertDeliveryDescription(ServiceDeliveryDescription deliveryDescription)
         {
             deliveryDescriptionControl.InsertDeliveryDescription(deliveryDescription);

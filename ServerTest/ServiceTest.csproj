@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataDeliveryDescriptionTest.cs" />
+    <Compile Include="DataPaymentMethodTest.cs" />
     <Compile Include="DataProductTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

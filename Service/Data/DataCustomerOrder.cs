@@ -151,6 +151,29 @@ namespace Service.Data
             }
         }
 
+        public IEnumerable<PaymentMethod> GetPaymentMethods()
+        {
+            List<PaymentMethod> paymentMethods = new List<PaymentMethod>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmdGetPaymentMethods = connection.CreateCommand())
+                {
+                    cmdGetPaymentMethods.CommandText = "SELECT pMethodId, paymentMethod FROM PaymentMethods";
+                    SqlDataReader paymentMethodReader = cmdGetPaymentMethods.ExecuteReader();
+
+                    while (paymentMethodReader.Read())
+                    {
+                        PaymentMethod pMethod = new PaymentMethod();
+                        pMethod.PMethodId = paymentMethodReader.GetInt32(paymentMethodReader.GetOrdinal("pMethodId"));
+                        pMethod.PaymentMethodValue = paymentMethodReader.GetString(paymentMethodReader.GetOrdinal("paymentMethod"));
+                        paymentMethods.Add(pMethod);
+                    }
+                }
+            }
+            return paymentMethods;
+        }
+
         public void InsertOrder(ServiceCustomerOrder order)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))

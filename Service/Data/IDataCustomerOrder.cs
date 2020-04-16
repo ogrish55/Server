@@ -16,5 +16,6 @@ namespace Service.Data
         IEnumerable<ServiceCustomerOrder> GetAllOrders();
         IEnumerable<ServiceCustomerOrder> GetCancelledOrders();
         ServiceCustomerOrder GetOrder(int customerOrderId);
+        IEnumerable<PaymentMethod> GetPaymentMethods();
     }
 }

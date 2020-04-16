@@ -50,6 +50,8 @@ namespace Service
         int DeleteDiscount(int discountId);
         [OperationContract]
         int GetDiscountByCode(string code);
+        [OperationContract]
+        IEnumerable<PaymentMethod> GetPaymentMethods();
 
     }
 }

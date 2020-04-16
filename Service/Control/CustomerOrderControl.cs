@@ -50,5 +50,10 @@ namespace Service.Control
         {
             return dataCustomerOrder.GetOrder(customerOrderId);
         }
+
+        public IEnumerable<PaymentMethod> GetPaymentMethods()
+        {
+            return dataCustomerOrder.GetPaymentMethods();
+        }
     }
 }
