@@ -74,7 +74,7 @@
     <Compile Include="Data\IDataDeliveryDescription.cs" />
     <Compile Include="Data\IDataProduct.cs" />
     <Compile Include="Data\IDataProductLine.cs" />
-    <Compile Include="Model\PaymentMethod.cs" />
+    <Compile Include="Model\ServicePaymentMethod.cs" />
     <Compile Include="Model\ServiceCustomer.cs" />
     <Compile Include="Model\ServiceCustomerOrder.cs" />
     <Compile Include="Model\ServiceDiscount.cs" />

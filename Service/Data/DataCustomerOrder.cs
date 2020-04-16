@@ -151,9 +151,9 @@ namespace Service.Data
             }
         }
 
-        public IEnumerable<PaymentMethod> GetPaymentMethods()
+        public IEnumerable<ServicePaymentMethod> GetPaymentMethods()
         {
-            List<PaymentMethod> paymentMethods = new List<PaymentMethod>();
+            List<ServicePaymentMethod> paymentMethods = new List<ServicePaymentMethod>();
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -164,7 +164,7 @@ namespace Service.Data
 
                     while (paymentMethodReader.Read())
                     {
-                        PaymentMethod pMethod = new PaymentMethod();
+                        ServicePaymentMethod pMethod = new ServicePaymentMethod();
                         pMethod.PMethodId = paymentMethodReader.GetInt32(paymentMethodReader.GetOrdinal("pMethodId"));
                         pMethod.PaymentMethodValue = paymentMethodReader.GetString(paymentMethodReader.GetOrdinal("paymentMethod"));
                         paymentMethods.Add(pMethod);

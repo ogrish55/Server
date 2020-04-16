@@ -66,7 +66,7 @@ namespace Service
             return customerOrderControl.GetOrder(customerOrderId);
         }
 
-        public IEnumerable<PaymentMethod> GetPaymentMethods()
+        public IEnumerable<ServicePaymentMethod> GetPaymentMethods()
         {
             return customerOrderControl.GetPaymentMethods();
         }

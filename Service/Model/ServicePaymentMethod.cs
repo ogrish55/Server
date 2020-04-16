@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Service.Model
 {
-    public class PaymentMethod
+    public class ServicePaymentMethod
     {
         public int PMethodId { get; set; }
         public string PaymentMethodValue { get; set; }

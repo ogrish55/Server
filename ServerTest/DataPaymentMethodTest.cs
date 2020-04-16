@@ -19,7 +19,7 @@ namespace ServiceTest
             DataCustomerOrder dataCustomerOrder = new DataCustomerOrder();
 
             //Act
-            List<PaymentMethod> paymentMethods = (List<PaymentMethod>) dataCustomerOrder.GetPaymentMethods();
+            List<ServicePaymentMethod> paymentMethods = (List<ServicePaymentMethod>) dataCustomerOrder.GetPaymentMethods();
 
             //Assert
             Assert.IsTrue(paymentMethods.Count() >= 1);

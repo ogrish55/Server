@@ -51,7 +51,7 @@ namespace Service
         [OperationContract]
         int GetDiscountByCode(string code);
         [OperationContract]
-        IEnumerable<PaymentMethod> GetPaymentMethods();
+        IEnumerable<ServicePaymentMethod> GetPaymentMethods();
 
     }
 }
