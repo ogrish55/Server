@@ -20,9 +20,9 @@ namespace Service.Control
             dataCustomer.DeleteCustomer(customerId);
         }
 
-        public void InsertCustomer(ServiceCustomer customer)
+        public int InsertCustomer(ServiceCustomer customer)
         {
-            dataCustomer.InsertCustomer(customer);
+           return dataCustomer.InsertCustomer(customer);
         }
 
         public void UpdateCustomer(ServiceCustomer customer)

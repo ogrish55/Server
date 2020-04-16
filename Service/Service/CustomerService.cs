@@ -21,9 +21,9 @@ namespace Service
             customerControl.DeleteCustomer(customerId);
         }
 
-        public void InsertCustomer(ServiceCustomer customer)
+        public int InsertCustomer(ServiceCustomer customer)
         {
-            customerControl.InsertCustomer(customer);
+          return customerControl.InsertCustomer(customer);
         }
 
         public void UpdateCustomer(ServiceCustomer customer)

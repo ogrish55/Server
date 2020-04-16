@@ -13,7 +13,7 @@ namespace Service
     public interface ICustomerService
     {
         [OperationContract]
-        void InsertCustomer(ServiceCustomer customer);
+        int InsertCustomer(ServiceCustomer customer);
         [OperationContract]
         void UpdateCustomer(ServiceCustomer customer);
         [OperationContract]
