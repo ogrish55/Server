@@ -81,9 +81,9 @@ namespace Service
             discountControl.InsertDiscount(discount);
         }
 
-        public void InsertOrder(ServiceCustomerOrder order)
+        public int InsertOrder(ServiceCustomerOrder order)
         {
-            customerOrderControl.InsertOrder(order);
+            return customerOrderControl.InsertOrder(order);
         }
 
         public void UpdateDeliveryDescription(ServiceDeliveryDescription deliveryDescription)

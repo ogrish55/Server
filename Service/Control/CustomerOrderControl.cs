@@ -21,9 +21,9 @@ namespace Service.Control
             dataCustomerOrder.DeleteOrder(orderId);
         }
 
-        public void InsertOrder(ServiceCustomerOrder order)
+        public int InsertOrder(ServiceCustomerOrder order)
         {
-            dataCustomerOrder.InsertOrder(order);
+            return dataCustomerOrder.InsertOrder(order);
         }
 
         public void UpdateOrder(ServiceCustomerOrder order)
