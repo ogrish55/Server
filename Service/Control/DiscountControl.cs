@@ -17,9 +17,9 @@ namespace Service.Control
             dataDiscount.InsertDiscount(discount);
         }
 
-        public int DeleteDiscount(int discountId)
+        public int DeleteDiscount(string discountCode)
         {
-            return dataDiscount.DeleteDiscount(discountId);
+            return dataDiscount.DeleteDiscount(discountCode);
         }
 
         public int GetDiscountByCode(string code)

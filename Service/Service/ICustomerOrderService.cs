@@ -47,7 +47,7 @@ namespace Service
         [OperationContract]
         void InsertDiscount(ServiceDiscount discount);
         [OperationContract]
-        int DeleteDiscount(int discountId);
+        int DeleteDiscount(string discountCode);
         [OperationContract]
         int GetDiscountByCode(string code);
         [OperationContract]

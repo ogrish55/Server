@@ -3,9 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.Data
 {
@@ -128,7 +125,7 @@ namespace Service.Data
                 using (SqlCommand cmdGetOrder = connection.CreateCommand())
                 {
                     ServiceCustomerOrder customerOrder = null;
-                    cmdGetOrder.CommandText = "SELECT finalPrice, orderStatus, dateOrder, customerId, discountId, paymentMethodId, orderId FROM CustomerOrder WHERE orderId = @orderId";
+                    cmdGetOrder.CommandText = "SELECT finalPrice, orderStatus, dateOrder, customerId, paymentMethodId, orderId FROM CustomerOrder WHERE orderId = @orderId";
                     cmdGetOrder.Parameters.AddWithValue("orderId", customerOrderId);
                     SqlDataReader orderReader = cmdGetOrder.ExecuteReader();
 
@@ -139,7 +136,6 @@ namespace Service.Data
                         customerOrder.Status = orderReader.GetString(orderReader.GetOrdinal("orderStatus"));
                         customerOrder.DateOrder = orderReader.GetDateTime(orderReader.GetOrdinal("dateOrder"));
                         customerOrder.CustomerId = orderReader.GetInt32(orderReader.GetOrdinal("customerId"));
-                        customerOrder.DiscountId = orderReader.GetInt32(orderReader.GetOrdinal("discountId"));
                         customerOrder.PaymentMethod = orderReader.GetInt32(orderReader.GetOrdinal("paymentMethodId"));
                         customerOrder.OrderId = orderReader.GetInt32(orderReader.GetOrdinal("orderId"));
                     }
@@ -173,21 +169,48 @@ namespace Service.Data
 
         public int InsertOrder(ServiceCustomerOrder order)
         {
-            int orderID;
+            
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
+                int orderId = 0;
                 using (SqlCommand cmdInsertOrder = connection.CreateCommand())
                 {
-                    cmdInsertOrder.CommandText = "INSERT INTO CustomerOrder (finalPrice, orderStatus, dateOrder, customerId, paymentMethodId) OUTPUT INSERTED.orderId VALUES (@finalPrice, @orderStatus, @dateOrder, @customerId, @paymentMethodId)";
-                    cmdInsertOrder.Parameters.AddWithValue("finalPrice", order.FinalPrice);
-                    cmdInsertOrder.Parameters.AddWithValue("orderStatus", order.Status);
-                    cmdInsertOrder.Parameters.AddWithValue("dateOrder", order.DateOrder);
-                    cmdInsertOrder.Parameters.AddWithValue("customerId", order.CustomerId);
-                    cmdInsertOrder.Parameters.AddWithValue("paymentMethodId", order.PaymentMethod);
-
-                    orderID = (int)cmdInsertOrder.ExecuteScalar();
+                        //InsertsOrder (Regardless of discount)
+                        cmdInsertOrder.CommandText = "INSERT INTO CustomerOrder (finalPrice, orderStatus, dateOrder, customerId, paymentMethodId) OUTPUT INSERTED.orderId VALUES (@finalPrice, @orderStatus, @dateOrder, @customerId, @paymentMethodId)";
+                        cmdInsertOrder.Parameters.AddWithValue("finalPrice", order.FinalPrice);
+                        cmdInsertOrder.Parameters.AddWithValue("orderStatus", order.Status);
+                        cmdInsertOrder.Parameters.AddWithValue("dateOrder", order.DateOrder);
+                        cmdInsertOrder.Parameters.AddWithValue("customerId", order.CustomerId);
+                        cmdInsertOrder.Parameters.AddWithValue("paymentMethodId", order.PaymentMethod);
+                        orderId = (int)cmdInsertOrder.ExecuteScalar();
+                        
+                        //If DiscountCode is present, then add row in DiscountOrder
+                    if(order.DiscountCode != null)
+                    {
+                        InsertDiscountOrder(orderId, order.DiscountCode);
+                    }
+                        
                 }
+                return orderId;
+            }
+            
+        }
+
+        public void InsertDiscountOrder(int orderId, string discountCode)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                
+                using(SqlCommand cmdInsertDiscountOrder = connection.CreateCommand())
+                {
+                    cmdInsertDiscountOrder.CommandText = "INSERT INTO DiscountOrder (orderId, discountCode) VALUES (@orderId, @discountCode)";
+                    cmdInsertDiscountOrder.Parameters.AddWithValue("orderId", orderId);
+                    cmdInsertDiscountOrder.Parameters.AddWithValue("discountCode", discountCode);
+                    cmdInsertDiscountOrder.ExecuteNonQuery();
+                }
+
             }
             return orderID;
         }

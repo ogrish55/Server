@@ -26,9 +26,9 @@ namespace Service
             deliveryDescriptionControl.DeleteDeliveryDescription(deliveryId);
         }
 
-        public int DeleteDiscount(int discountId)
+        public int DeleteDiscount(string discountCode)
         {
-            return discountControl.DeleteDiscount(discountId);
+            return discountControl.DeleteDiscount(discountCode);
         }
 
         public void DeleteOrder(int orderId)

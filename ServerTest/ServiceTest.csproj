@@ -56,6 +56,7 @@
     <Compile Include="DataProductTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CancelOrderTest.cs" />
+    <Compile Include="DiscountTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

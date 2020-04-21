@@ -1,11 +1,6 @@
 ﻿using Service.Model;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.Data
 {
@@ -17,7 +12,7 @@ namespace Service.Data
             _connectionString = ConfigurationManager.ConnectionStrings["WebshopDatabase"].ConnectionString;
         }
 
-        public int DeleteDiscount(int discountId)
+        public int DeleteDiscount(string discountCode)
         {
             int rowsAffected;
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -25,15 +20,15 @@ namespace Service.Data
                 connection.Open();
                 using (SqlCommand cmdDeleteDiscount = connection.CreateCommand())
                 {
-                    cmdDeleteDiscount.CommandText = "DELETE FROM Discount WHERE disocuntId = @discountId";
-                    cmdDeleteDiscount.Parameters.AddWithValue("productId", discountId);
-
+                    cmdDeleteDiscount.CommandText = "DELETE FROM Discount WHERE discountCode = @discountCode";
+                    cmdDeleteDiscount.Parameters.AddWithValue("discountCode", discountCode);
                     rowsAffected = cmdDeleteDiscount.ExecuteNonQuery();
                 }
             }
             return rowsAffected;
         }
 
+        //  If no discount with the given code exists, this method will return 0
         public int GetDiscountByCode(string code)
         {
             int discount = 0;
