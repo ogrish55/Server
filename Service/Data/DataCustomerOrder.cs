@@ -212,7 +212,6 @@ namespace Service.Data
                 }
 
             }
-            return orderID;
         }
 
         public int UpdateOrder(ServiceCustomerOrder order)
