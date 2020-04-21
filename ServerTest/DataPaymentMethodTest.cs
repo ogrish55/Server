@@ -24,5 +24,25 @@ namespace ServiceTest
             //Assert
             Assert.IsTrue(paymentMethods.Count() >= 1);
         }
+
+        [TestMethod]
+        public void SetPaymentMethodTest()
+        {
+            //Arrange
+            ServiceCustomerOrder order = new ServiceCustomerOrder();
+            DataCustomerOrder dco = new DataCustomerOrder();
+            ServiceCustomerOrder testOrder;
+            order.DateOrder = DateTime.Today;
+            order.FinalPrice = 5000;
+            order.Status = "Test Status";
+            order.PaymentMethod = 1;
+            order.CustomerId = 1;
+            //Act
+            int idOfTestOrder = dco.InsertOrder(order);
+            testOrder = dco.GetOrder(idOfTestOrder);
+
+            //Assert
+            Assert.IsNotNull(testOrder.PaymentMethod);
+        }
     }
 }

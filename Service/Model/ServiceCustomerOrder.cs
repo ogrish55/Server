@@ -19,7 +19,7 @@ namespace Service.Model
         [DataMember]
         public int CustomerId { get; set; }
         [DataMember]
-        public int DiscountId { get; set; }
+        public string DiscountCode { get; set; }
         [DataMember]
         public int PaymentMethod { get; set; }
         [DataMember]

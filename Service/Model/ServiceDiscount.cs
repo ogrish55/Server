@@ -11,9 +11,6 @@ namespace Service.Model
     public class ServiceDiscount
     {
         [DataMember]
-        public int DiscountId { get; set; }
-
-        [DataMember]
         public string DiscountCode { get; set; }
 
         [DataMember]

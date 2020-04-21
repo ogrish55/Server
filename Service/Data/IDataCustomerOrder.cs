@@ -10,7 +10,7 @@ namespace Service.Data
     public interface IDataCustomerOrder
     {
         int DeleteOrder(int orderId);
-        void InsertOrder(ServiceCustomerOrder order);
+        int InsertOrder(ServiceCustomerOrder order);
         int UpdateOrder(ServiceCustomerOrder order);
         IEnumerable<ServiceCustomerOrder> GetActiveOrders();
         IEnumerable<ServiceCustomerOrder> GetAllOrders();
