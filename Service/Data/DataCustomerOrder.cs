@@ -42,7 +42,7 @@ namespace Service.Data
                 connection.Open();
                 using (SqlCommand cmdGetActiveOrders = connection.CreateCommand())
                 {
-                    cmdGetActiveOrders.CommandText = "SELECT orderId, finalPrice, orderStatus, dateOrder, customerId, discountId, paymentMethodId FROM CustomerOrder WHERE orderStatus = @active";
+                    cmdGetActiveOrders.CommandText = "SELECT orderId, finalPrice, orderStatus, dateOrder, customerId, paymentMethodId FROM CustomerOrder WHERE orderStatus = @active";
                     cmdGetActiveOrders.Parameters.AddWithValue("@active", "active");
                     SqlDataReader activeOrdersReader = cmdGetActiveOrders.ExecuteReader();
 
@@ -53,7 +53,6 @@ namespace Service.Data
                         customerOrder.Status = activeOrdersReader.GetString(activeOrdersReader.GetOrdinal("orderStatus"));
                         customerOrder.DateOrder = activeOrdersReader.GetDateTime(activeOrdersReader.GetOrdinal("dateOrder"));
                         customerOrder.CustomerId = activeOrdersReader.GetInt32(activeOrdersReader.GetOrdinal("customerId"));
-                        customerOrder.DiscountId = activeOrdersReader.GetInt32(activeOrdersReader.GetOrdinal("discountId"));
                         customerOrder.PaymentMethod = activeOrdersReader.GetInt32(activeOrdersReader.GetOrdinal("paymentMethodId"));
                         customerOrder.OrderId = activeOrdersReader.GetInt32(activeOrdersReader.GetOrdinal("orderId"));
                         customerOrders.Add(customerOrder);
@@ -72,7 +71,7 @@ namespace Service.Data
                 connection.Open();
                 using (SqlCommand cmdGetAllOrders = connection.CreateCommand())
                 {
-                    cmdGetAllOrders.CommandText = "SELECT orderId, finalPrice, orderStatus, dateOrder, customerId, discountId, paymentMethodId FROM CustomerOrder";
+                    cmdGetAllOrders.CommandText = "SELECT orderId, finalPrice, orderStatus, dateOrder, customerId, paymentMethodId FROM CustomerOrder";
                     SqlDataReader allOrdersReader = cmdGetAllOrders.ExecuteReader();
 
                     while (allOrdersReader.Read())
@@ -82,7 +81,6 @@ namespace Service.Data
                         customerOrder.Status = allOrdersReader.GetString(allOrdersReader.GetOrdinal("orderStatus"));
                         customerOrder.DateOrder = allOrdersReader.GetDateTime(allOrdersReader.GetOrdinal("dateOrder"));
                         customerOrder.CustomerId = allOrdersReader.GetInt32(allOrdersReader.GetOrdinal("customerId"));
-                        customerOrder.DiscountId = allOrdersReader.GetInt32(allOrdersReader.GetOrdinal("discountId"));
                         customerOrder.PaymentMethod = allOrdersReader.GetInt32(allOrdersReader.GetOrdinal("paymentMethodId"));
                         customerOrder.OrderId = allOrdersReader.GetInt32(allOrdersReader.GetOrdinal("orderId"));
                         customerOrders.Add(customerOrder);
@@ -101,7 +99,7 @@ namespace Service.Data
                 connection.Open();
                 using (SqlCommand cmdGetCancelledOrders = connection.CreateCommand())
                 {
-                    cmdGetCancelledOrders.CommandText = "SELECT orderId, finalPrice, orderStatus, dateOrder, customerId, discountId, paymentMethodId FROM CustomerOrder  WHERE orderStatus = @cancelled ";
+                    cmdGetCancelledOrders.CommandText = "SELECT orderId, finalPrice, orderStatus, dateOrder, customerId, paymentMethodId FROM CustomerOrder  WHERE orderStatus = @cancelled ";
                     cmdGetCancelledOrders.Parameters.AddWithValue("@cancelled", "Cancelled");
                     SqlDataReader allOrdersReader = cmdGetCancelledOrders.ExecuteReader();
 
@@ -112,7 +110,6 @@ namespace Service.Data
                         customerOrder.Status = allOrdersReader.GetString(allOrdersReader.GetOrdinal("orderStatus"));
                         customerOrder.DateOrder = allOrdersReader.GetDateTime(allOrdersReader.GetOrdinal("dateOrder"));
                         customerOrder.CustomerId = allOrdersReader.GetInt32(allOrdersReader.GetOrdinal("customerId"));
-                        customerOrder.DiscountId = allOrdersReader.GetInt32(allOrdersReader.GetOrdinal("discountId"));
                         customerOrder.PaymentMethod = allOrdersReader.GetInt32(allOrdersReader.GetOrdinal("paymentMethodId"));
                         customerOrder.OrderId = allOrdersReader.GetInt32(allOrdersReader.GetOrdinal("orderId"));
                         customerOrders.Add(customerOrder);
@@ -174,24 +171,25 @@ namespace Service.Data
             return paymentMethods;
         }
 
-        public void InsertOrder(ServiceCustomerOrder order)
+        public int InsertOrder(ServiceCustomerOrder order)
         {
+            int orderID;
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 using (SqlCommand cmdInsertOrder = connection.CreateCommand())
                 {
-                    cmdInsertOrder.CommandText = "INSERT INTO CustomerOrder (finalPrice, orderStatus, dateOrder, customerId, discountId, paymentMethodId) VALUES (@finalPrice, @orderStatus, @dateOrder, @customerId, @discountId, @paymentMethodId)";
+                    cmdInsertOrder.CommandText = "INSERT INTO CustomerOrder (finalPrice, orderStatus, dateOrder, customerId, paymentMethodId) OUTPUT INSERTED.orderId VALUES (@finalPrice, @orderStatus, @dateOrder, @customerId, @paymentMethodId)";
                     cmdInsertOrder.Parameters.AddWithValue("finalPrice", order.FinalPrice);
                     cmdInsertOrder.Parameters.AddWithValue("orderStatus", order.Status);
                     cmdInsertOrder.Parameters.AddWithValue("dateOrder", order.DateOrder);
                     cmdInsertOrder.Parameters.AddWithValue("customerId", order.CustomerId);
-                    cmdInsertOrder.Parameters.AddWithValue("discountId", order.DiscountId);
                     cmdInsertOrder.Parameters.AddWithValue("paymentMethodId", order.PaymentMethod);
 
-                    cmdInsertOrder.ExecuteNonQuery();
+                    orderID = (int)cmdInsertOrder.ExecuteScalar();
                 }
             }
+            return orderID;
         }
 
         public int UpdateOrder(ServiceCustomerOrder order)
@@ -202,8 +200,9 @@ namespace Service.Data
                 connection.Open();
                 using (SqlCommand cmdUpdateOrder = connection.CreateCommand())
                 {
-                    cmdUpdateOrder.CommandText = "UPDATE CustomerOrder SET orderStatus = @orderStatus WHERE orderId = @orderId";
+                    cmdUpdateOrder.CommandText = "UPDATE CustomerOrder SET orderStatus = @orderStatus, finalPrice = @finalPrice WHERE orderId = @orderId";
                     cmdUpdateOrder.Parameters.AddWithValue("orderStatus", order.Status);
+                    cmdUpdateOrder.Parameters.AddWithValue("finalPrice", order.FinalPrice);
                     cmdUpdateOrder.Parameters.AddWithValue("orderId", order.OrderId);
                     rowsAffected = cmdUpdateOrder.ExecuteNonQuery();
                 }

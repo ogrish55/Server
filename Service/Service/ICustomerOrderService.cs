@@ -15,7 +15,7 @@ namespace Service
         void DeleteOrder(int orderId);
 
         [OperationContract]
-        void InsertOrder(ServiceCustomerOrder order);
+        int InsertOrder(ServiceCustomerOrder order);
 
         [OperationContract]
         void UpdateOrder(ServiceCustomerOrder order);
