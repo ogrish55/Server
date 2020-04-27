@@ -42,7 +42,10 @@ namespace Service.Data
                     cmdGetDiscountByCode.Parameters.AddWithValue("code", code);
                     SqlDataReader discountReader = cmdGetDiscountByCode.ExecuteReader();
 
-                    discount = discountReader.GetInt32(discountReader.GetOrdinal("discountAmount"));
+                    if (discountReader.Read())
+                    {
+                        discount = discountReader.GetInt32(discountReader.GetOrdinal("discountAmount"));
+                    }
                 }
             }
             return discount;
