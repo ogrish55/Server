@@ -43,7 +43,7 @@ namespace Service.Data
                 connection.Open();
                 using (SqlCommand cmdGetAllProducts = connection.CreateCommand())
                 {
-                    cmdGetAllProducts.CommandText = "SELECT productId, name, price, description, amountOnStock FROM Product";
+                    cmdGetAllProducts.CommandText = "SELECT productId, name, price, description, amountOnStock, brand FROM Product";
                     SqlDataReader productsReader = cmdGetAllProducts.ExecuteReader();
 
                     while (productsReader.Read())
