@@ -44,7 +44,7 @@ namespace Service.Data
 
                     if (discountReader.Read())
                     {
-                        discount = discountReader.GetInt32(discountReader.GetOrdinal("discountAmount"));
+                        discount = discountReader.GetDecimal(discountReader.GetOrdinal("discountAmount"));
                     }
                 }
             }
