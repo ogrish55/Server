@@ -43,7 +43,7 @@ namespace Service.Data
                 connection.Open();
                 using (SqlCommand cmdGetAllProducts = connection.CreateCommand())
                 {
-                    cmdGetAllProducts.CommandText = "SELECT productId, name, price, description FROM Product";
+                    cmdGetAllProducts.CommandText = "SELECT productId, name, price, description, amountOnStock FROM Product";
                     SqlDataReader productsReader = cmdGetAllProducts.ExecuteReader();
 
                     while (productsReader.Read())
@@ -53,6 +53,7 @@ namespace Service.Data
                         product.Description = productsReader.GetString(productsReader.GetOrdinal("description"));
                         product.Price = productsReader.GetDecimal(productsReader.GetOrdinal("price"));
                         product.ProductId = productsReader.GetInt32(productsReader.GetOrdinal("productId"));
+                        product.AmountOnStock = productsReader.GetInt32(productsReader.GetOrdinal("amountOnStock"));
 
                         products.Add(product);
                     }
