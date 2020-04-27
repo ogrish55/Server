@@ -37,7 +37,7 @@ namespace ServiceTest
             DataDiscount dataDiscount = new DataDiscount();
 
             // Act
-            int Amount = dataDiscount.GetDiscountByCode("acksyp");
+            decimal Amount = dataDiscount.GetDiscountByCode("acksyp");
 
             // Assert
             Assert.AreEqual(10, Amount);
