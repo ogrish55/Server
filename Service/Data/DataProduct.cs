@@ -71,7 +71,7 @@ namespace Service.Data
                 using (SqlCommand cmdGetProductById = connection.CreateCommand())
                 {
                     ServiceProduct product = new ServiceProduct();
-                    cmdGetProductById.CommandText = "SELECT productId, name, price, description FROM Product WHERE productId = @productId";
+                    cmdGetProductById.CommandText = "SELECT productId, name, price, description, amountOnStock FROM Product WHERE productId = @productId";
                     cmdGetProductById.Parameters.AddWithValue("productId", productId);
                     SqlDataReader productReader = cmdGetProductById.ExecuteReader();
 
@@ -81,6 +81,7 @@ namespace Service.Data
                         product.Description = productReader.GetString(productReader.GetOrdinal("description"));
                         product.Price = productReader.GetDecimal(productReader.GetOrdinal("price"));
                         product.ProductId = productReader.GetInt32(productReader.GetOrdinal("productId"));
+                        product.AmountOnStock = productReader.GetInt32(productReader.GetOrdinal("amountOnStock"));
                     }
                     return product;
                 }
