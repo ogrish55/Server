@@ -29,9 +29,9 @@ namespace Service.Data
         }
 
         //  If no discount with the given code exists, this method will return 0
-        public int GetDiscountByCode(string code)
+        public double GetDiscountByCode(string code)
         {
-            int discount = 0;
+            double discount = 0;
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
