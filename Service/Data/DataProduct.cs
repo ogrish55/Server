@@ -116,11 +116,12 @@ namespace Service.Data
                 connection.Open();
                 using (SqlCommand cmdUpdateProduct = connection.CreateCommand())
                 {
-                    cmdUpdateProduct.CommandText = "UPDATE Product SET name = @name, price = @price, description = @description WHERE productId = @productId";
+                    cmdUpdateProduct.CommandText = "UPDATE Product SET name = @name, price = @price, description = @description, amountOnStock = @amount WHERE productId = @productId";
                     cmdUpdateProduct.Parameters.AddWithValue("name", product.Name);
                     cmdUpdateProduct.Parameters.AddWithValue("price", product.Price);
                     cmdUpdateProduct.Parameters.AddWithValue("description", product.Description);
                     cmdUpdateProduct.Parameters.AddWithValue("productId", product.ProductId);
+                    cmdUpdateProduct.Parameters.AddWithValue("amount", product.AmountOnStock);
 
                     rowsAffected = cmdUpdateProduct.ExecuteNonQuery();
                 }
