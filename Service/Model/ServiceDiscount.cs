@@ -14,6 +14,6 @@ namespace Service.Model
         public string DiscountCode { get; set; }
 
         [DataMember]
-        public int DiscountAmount { get; set; }
+        public double DiscountAmount { get; set; }
     }
 }

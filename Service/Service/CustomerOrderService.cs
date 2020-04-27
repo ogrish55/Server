@@ -56,7 +56,7 @@ namespace Service
             return deliveryDescriptionControl.GetDeliveryDescriptionById(deliveryId);
         }
 
-        public int GetDiscountByCode(string code)
+        public double GetDiscountByCode(string code)
         {
             return discountControl.GetDiscountByCode(code);
         }
