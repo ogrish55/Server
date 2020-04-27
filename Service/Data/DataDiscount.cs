@@ -29,9 +29,9 @@ namespace Service.Data
         }
 
         //  If no discount with the given code exists, this method will return 0
-        public double GetDiscountByCode(string code)
+        public decimal GetDiscountByCode(string code)
         {
-            double discount = 0;
+            decimal discount = 0;
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
