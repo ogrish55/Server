@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Transactions;
 
 namespace Service.Data
 {
@@ -242,49 +243,49 @@ namespace Service.Data
         public bool FinishCheckout(ServiceCustomer customer, ServiceCustomerOrder order)
         {
             bool success = false;
-            SqlTransaction transaction;
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                transaction = connection.BeginTransaction();
                 try
                 {
-                    int customerID = dataCustomer.InsertCustomer(customer);
-                    order.CustomerId = customerID;
-                    int orderID = InsertOrder(order);
-                    order.OrderId = orderID;
-
-                    decimal totalPrice = -1;
-                    foreach (var item in order.ShoppingCart)
+                    using (TransactionScope scope = new TransactionScope())
                     {
-                        item.OrderId = orderID;
-                        totalPrice += item.SubTotal;
-                        dataProductLine.InsertProductLine(item);
+                        int customerID = dataCustomer.InsertCustomer(customer);
+                        order.CustomerId = customerID;
+                        int orderID = InsertOrder(order);
+                        order.OrderId = orderID;
 
-                        // Retrieve product from DB and read amountOnStock
-                        ServiceProduct productFromDB = dataProduct.GetProductById(item.Product.ProductId);
-                        int remainingAmountOnStock = productFromDB.AmountOnStock - item.Amount;
-                        if (remainingAmountOnStock < 0)
+                        decimal totalPrice = -1;
+                        foreach (var item in order.ShoppingCart)
                         {
-                            throw new Exception();
-                        }
-                        else
-                        {
-                            productFromDB.AmountOnStock = remainingAmountOnStock;
-                            dataProduct.UpdateProduct(productFromDB);
-                        }
+                            item.OrderId = orderID;
+                            totalPrice += item.SubTotal;
+                            dataProductLine.InsertProductLine(item);
 
+                            // Retrieve product from DB and read amountOnStock
+                            ServiceProduct productFromDB = dataProduct.GetProductById(item.Product.ProductId);
+                            int remainingAmountOnStock = productFromDB.AmountOnStock - item.Amount;
+                            if (remainingAmountOnStock < 0)
+                            {
+                                throw new TransactionAbortedException();
+                            }
+                            else
+                            {
+                                productFromDB.AmountOnStock = remainingAmountOnStock;
+                                dataProduct.UpdateProduct(productFromDB);
+                            }
+
+                        }
+                        order.FinalPrice = totalPrice;
+                        UpdateOrder(order);
+                        scope.Complete();
+                        success = true;
                     }
-                    order.FinalPrice = totalPrice;
-                    UpdateOrder(order);
-                    transaction.Commit();
-                    success = true;
                 }
 
-                catch (Exception e)
+                catch (TransactionAbortedException ex)
                 {
                     success = false;
-                    transaction.Rollback();
                 }
             }
             return success;
