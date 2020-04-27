@@ -9,9 +9,16 @@ namespace Service.Data
     public class DataCustomerOrder : IDataCustomerOrder
     {
         private string _connectionString;
+        private DataCustomer dataCustomer;
+        private DataProductLine dataProductLine;
+        private DataProduct dataProduct;
+
         public DataCustomerOrder()
         {
             _connectionString = ConfigurationManager.ConnectionStrings["WebshopDatabase"].ConnectionString;
+            dataCustomer = new DataCustomer();
+            dataProductLine = new DataProductLine();
+            dataProduct = new DataProduct();
         }
         public int DeleteOrder(int orderId)
         {
@@ -230,6 +237,57 @@ namespace Service.Data
                 }
             }
             return rowsAffected;
+        }
+
+        public bool FinishCheckout(ServiceCustomer customer, ServiceCustomerOrder order)
+        {
+            bool success = false;
+            SqlTransaction transaction;
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                transaction = connection.BeginTransaction();
+                try
+                {
+                    int customerID = dataCustomer.InsertCustomer(customer);
+                    order.CustomerId = customerID;
+                    int orderID = InsertOrder(order);
+                    order.OrderId = orderID;
+
+                    decimal totalPrice = -1;
+                    foreach (var item in order.ShoppingCart)
+                    {
+                        item.OrderId = orderID;
+                        totalPrice += item.SubTotal;
+                        dataProductLine.InsertProductLine(item);
+
+                        // Retrieve product from DB and read amountOnStock
+                        ServiceProduct productFromDB = dataProduct.GetProductById(item.Product.ProductId);
+                        int remainingAmountOnStock = productFromDB.AmountOnStock - item.Amount;
+                        if (remainingAmountOnStock < 0)
+                        {
+                            throw new Exception();
+                        }
+                        else
+                        {
+                            productFromDB.AmountOnStock = remainingAmountOnStock;
+                            dataProduct.UpdateProduct(productFromDB);
+                        }
+
+                    }
+                    order.FinalPrice = totalPrice;
+                    UpdateOrder(order);
+                    transaction.Commit();
+                    success = true;
+                }
+
+                catch (Exception e)
+                {
+                    success = false;
+                    transaction.Rollback();
+                }
+            }
+            return success;
         }
     }
 }

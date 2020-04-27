@@ -53,5 +53,8 @@ namespace Service
         [OperationContract]
         IEnumerable<ServicePaymentMethod> GetPaymentMethods();
 
+        [OperationContract]
+        bool FinishCheckout(ServiceCustomer customer, ServiceCustomerOrder order);
+
     }
 }
