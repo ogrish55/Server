@@ -24,6 +24,7 @@ namespace Service.Model
         public int PaymentMethod { get; set; }
         [DataMember]
         public int OrderId { get; set; }
-
+        [DataMember]
+        public List<ServiceProductLine> ShoppingCart;
     }
 }
