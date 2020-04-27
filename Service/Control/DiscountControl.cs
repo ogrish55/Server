@@ -22,7 +22,7 @@ namespace Service.Control
             return dataDiscount.DeleteDiscount(discountCode);
         }
 
-        public int GetDiscountByCode(string code)
+        public double GetDiscountByCode(string code)
         {
             return dataDiscount.GetDiscountByCode(code);
         }
