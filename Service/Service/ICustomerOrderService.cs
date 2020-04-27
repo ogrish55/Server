@@ -49,7 +49,7 @@ namespace Service
         [OperationContract]
         int DeleteDiscount(string discountCode);
         [OperationContract]
-        int GetDiscountByCode(string code);
+        double GetDiscountByCode(string code);
         [OperationContract]
         IEnumerable<ServicePaymentMethod> GetPaymentMethods();
 
