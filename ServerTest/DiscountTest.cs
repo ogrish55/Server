@@ -29,5 +29,18 @@ namespace ServiceTest
             //ASSERT
             Assert.IsNotNull(testOrder);
         }
+
+        [TestMethod]
+        public void GetDiscountByCodeTest()
+        {
+            // Arrange
+            DataDiscount dataDiscount = new DataDiscount();
+
+            // Act
+            int Amount = dataDiscount.GetDiscountByCode("acksyp");
+
+            // Assert
+            Assert.AreEqual(10, Amount);
+        }
     }
 }
