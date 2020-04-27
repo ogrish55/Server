@@ -6,6 +6,6 @@ namespace Service.Data
     {
         void InsertDiscount(ServiceDiscount discount);
         int DeleteDiscount(string code);
-        double GetDiscountByCode(string code);
+        decimal GetDiscountByCode(string code);
     }
 }
