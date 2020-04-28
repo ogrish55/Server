@@ -34,5 +34,11 @@ namespace Service
 
         [OperationContract]
         IEnumerable<ServiceProduct> GetAllProducts();
+
+        [OperationContract]
+        IEnumerable<ServiceReview> GetAllReviewsByProductId(int productId);
+
+        [OperationContract]
+        int InsertReview(ServiceReview review);
     }
 }
