@@ -22,6 +22,8 @@ namespace Service.Model
         public int AmountOnStock { get; set; }
         [DataMember]
         public string Brand { get; set; }
+        [DataMember]
+        public string Category { get; set; }
         public override string ToString()
         {
             return $"{ProductId} {Name} {Price} ({Description})";

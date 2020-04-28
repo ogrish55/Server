@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Service.Control;
 using Service.Model;
 
@@ -12,6 +8,7 @@ namespace Service
     {
         ProductLineControl productLineControl;
         ProductControl productControl;
+        ReviewControl reviewControl;
         public ProductLineService()
         {
             productLineControl = new ProductLineControl();
@@ -33,6 +30,11 @@ namespace Service
             return productControl.GetAllProducts();
         }
 
+        public IEnumerable<ServiceReview> GetAllReviewsByProductId(int productId)
+        {
+            return reviewControl.GetAllReviewsByProductId(productId);
+        }
+
         public ServiceProduct GetProductById(int productId)
         {
             return productControl.GetProductById(productId);
@@ -46,6 +48,11 @@ namespace Service
         public void InsertProductLine(ServiceProductLine serviceProductLine)
         {
             productLineControl.InsertProductLine(serviceProductLine);
+        }
+
+        public int InsertReview(ServiceReview review)
+        {
+            return reviewControl.InsertReview(review);
         }
 
         public void UpdateProduct(ServiceProduct product)

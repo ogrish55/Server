@@ -43,7 +43,7 @@ namespace Service.Data
                 connection.Open();
                 using (SqlCommand cmdGetAllProducts = connection.CreateCommand())
                 {
-                    cmdGetAllProducts.CommandText = "SELECT productId, name, price, description, amountOnStock, brand FROM Product";
+                    cmdGetAllProducts.CommandText = "SELECT productId, name, price, description, amountOnStock, brand, category FROM Product";
                     SqlDataReader productsReader = cmdGetAllProducts.ExecuteReader();
 
                     while (productsReader.Read())
@@ -55,6 +55,7 @@ namespace Service.Data
                         product.ProductId = productsReader.GetInt32(productsReader.GetOrdinal("productId"));
                         product.AmountOnStock = productsReader.GetInt32(productsReader.GetOrdinal("amountOnStock"));
                         product.Brand = productsReader.GetString(productsReader.GetOrdinal("brand"));
+                        product.Category = productsReader.GetString(productsReader.GetOrdinal("category"));
 
                         products.Add(product);
                     }
@@ -72,7 +73,7 @@ namespace Service.Data
                 using (SqlCommand cmdGetProductById = connection.CreateCommand())
                 {
                     ServiceProduct product = new ServiceProduct();
-                    cmdGetProductById.CommandText = "SELECT productId, name, price, description, amountOnStock, brand FROM Product WHERE productId = @productId";
+                    cmdGetProductById.CommandText = "SELECT productId, name, price, description, amountOnStock, brand, category FROM Product WHERE productId = @productId";
                     cmdGetProductById.Parameters.AddWithValue("productId", productId);
                     SqlDataReader productReader = cmdGetProductById.ExecuteReader();
 
@@ -84,6 +85,7 @@ namespace Service.Data
                         product.ProductId = productReader.GetInt32(productReader.GetOrdinal("productId"));
                         product.AmountOnStock = productReader.GetInt32(productReader.GetOrdinal("amountOnStock"));
                         product.Brand = productReader.GetString(productReader.GetOrdinal("brand"));
+                        product.Category = productReader.GetString(productReader.GetOrdinal("category"));
                     }
                     return product;
                 }
