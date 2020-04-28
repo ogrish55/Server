@@ -43,7 +43,7 @@ namespace Service.Data
                 connection.Open();
                 using (SqlCommand cmdGetAllProducts = connection.CreateCommand())
                 {
-                    cmdGetAllProducts.CommandText = "SELECT productId, name, price, description, amountOnStock, brand FROM Product";
+                    cmdGetAllProducts.CommandText = "SELECT productId, name, price, description, amountOnStock, brand, category FROM Product";
                     SqlDataReader productsReader = cmdGetAllProducts.ExecuteReader();
 
                     while (productsReader.Read())
@@ -55,6 +55,7 @@ namespace Service.Data
                         product.ProductId = productsReader.GetInt32(productsReader.GetOrdinal("productId"));
                         product.AmountOnStock = productsReader.GetInt32(productsReader.GetOrdinal("amountOnStock"));
                         product.Brand = productsReader.GetString(productsReader.GetOrdinal("brand"));
+                        product.Category = productsReader.GetString(productsReader.GetOrdinal("category"));
 
                         products.Add(product);
                     }
@@ -72,7 +73,7 @@ namespace Service.Data
                 using (SqlCommand cmdGetProductById = connection.CreateCommand())
                 {
                     ServiceProduct product = new ServiceProduct();
-                    cmdGetProductById.CommandText = "SELECT productId, name, price, description, amountOnStock FROM Product WHERE productId = @productId";
+                    cmdGetProductById.CommandText = "SELECT productId, name, price, description, amountOnStock, brand, category FROM Product WHERE productId = @productId";
                     cmdGetProductById.Parameters.AddWithValue("productId", productId);
                     SqlDataReader productReader = cmdGetProductById.ExecuteReader();
 
@@ -84,6 +85,7 @@ namespace Service.Data
                         product.ProductId = productReader.GetInt32(productReader.GetOrdinal("productId"));
                         product.AmountOnStock = productReader.GetInt32(productReader.GetOrdinal("amountOnStock"));
                         product.Brand = productReader.GetString(productReader.GetOrdinal("brand"));
+                        product.Category = productReader.GetString(productReader.GetOrdinal("category"));
                     }
                     return product;
                 }
@@ -98,12 +100,13 @@ namespace Service.Data
                 connection.Open();
                 using (SqlCommand cmdInsertProduct = connection.CreateCommand())
                 {
-                    cmdInsertProduct.CommandText = "INSERT INTO Product (name, price, description, amountOnStock, brand) OUTPUT INSERTED.productId VALUES (@name, @price, @description, @amount, @brand)";
+                    cmdInsertProduct.CommandText = "INSERT INTO Product (name, price, description, amountOnStock, brand, category) OUTPUT INSERTED.productId VALUES (@name, @price, @description, @amount, @brand, @category)";
                     cmdInsertProduct.Parameters.AddWithValue("name", product.Name);
                     cmdInsertProduct.Parameters.AddWithValue("price", product.Price);
                     cmdInsertProduct.Parameters.AddWithValue("description", product.Description);
                     cmdInsertProduct.Parameters.AddWithValue("amount", product.AmountOnStock);
                     cmdInsertProduct.Parameters.AddWithValue("brand", product.Brand);
+                    cmdInsertProduct.Parameters.AddWithValue("category", product.Category);
 
                     insertedId = (int)cmdInsertProduct.ExecuteScalar();
                 }
@@ -119,12 +122,13 @@ namespace Service.Data
                 connection.Open();
                 using (SqlCommand cmdUpdateProduct = connection.CreateCommand())
                 {
-                    cmdUpdateProduct.CommandText = "UPDATE Product SET name = @name, price = @price, description = @description, brand = @brand WHERE productId = @productId";
+                    cmdUpdateProduct.CommandText = "UPDATE Product SET name = @name, price = @price, description = @description, brand = @brand category = @category WHERE productId = @productId";
                     cmdUpdateProduct.Parameters.AddWithValue("name", product.Name);
                     cmdUpdateProduct.Parameters.AddWithValue("price", product.Price);
                     cmdUpdateProduct.Parameters.AddWithValue("description", product.Description);
                     cmdUpdateProduct.Parameters.AddWithValue("productId", product.ProductId);
                     cmdUpdateProduct.Parameters.AddWithValue("brand", product.Brand);
+                    cmdUpdateProduct.Parameters.AddWithValue("category", product.Category);
 
                     rowsAffected = cmdUpdateProduct.ExecuteNonQuery();
                 }
