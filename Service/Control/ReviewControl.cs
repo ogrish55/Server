@@ -7,7 +7,7 @@ namespace Service.Control
     public class ReviewControl
     {
         IDataReview dataReview;
-    
+
         public ReviewControl()
         {
             dataReview = new DataReview();

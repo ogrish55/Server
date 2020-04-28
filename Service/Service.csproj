@@ -78,7 +78,6 @@
     <Compile Include="Data\IDataProduct.cs" />
     <Compile Include="Data\IDataProductLine.cs" />
     <Compile Include="Data\IDataReview.cs" />
-    <Compile Include="Model\ServiceReview.cs" />
     <Compile Include="Model\ServicePaymentMethod.cs" />
     <Compile Include="Model\ServiceCustomer.cs" />
     <Compile Include="Model\ServiceCustomerOrder.cs" />
@@ -86,6 +85,7 @@
     <Compile Include="Model\ServiceDeliveryDescription.cs" />
     <Compile Include="Model\ServiceProduct.cs" />
     <Compile Include="Model\ServiceProductLine.cs" />
+    <Compile Include="Model\ServiceReview.cs" />
     <Compile Include="Service\CustomerService.cs" />
     <Compile Include="Service\ICustomerService.cs" />
     <Compile Include="Service\ICustomerOrderService.cs" />

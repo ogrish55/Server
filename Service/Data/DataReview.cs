@@ -31,7 +31,7 @@ namespace Service.Data
                         review.ReviewId = reviewReader.GetInt32(reviewReader.GetOrdinal("reviewId"));
                         review.Comment = reviewReader.GetString(reviewReader.GetOrdinal("comment"));
                         review.Rating = reviewReader.GetInt32(reviewReader.GetOrdinal("rating"));
-                        
+
                         reviews.Add(review);
                     }
                 }
