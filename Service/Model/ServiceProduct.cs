@@ -28,5 +28,7 @@ namespace Service.Model
         {
             return $"{ProductId} {Name} {Price} ({Description})";
         }
+
+        public byte[] rowId;
     }
 }

@@ -73,7 +73,7 @@ namespace Service.Data
                 using (SqlCommand cmdGetProductById = connection.CreateCommand())
                 {
                     ServiceProduct product = new ServiceProduct();
-                    cmdGetProductById.CommandText = "SELECT productId, name, price, description, amountOnStock, brand, category FROM Product WHERE productId = @productId";
+                    cmdGetProductById.CommandText = "SELECT productId, name, price, description, amountOnStock, brand, category, rowID  FROM Product WHERE productId = @productId";
                     cmdGetProductById.Parameters.AddWithValue("productId", productId);
                     SqlDataReader productReader = cmdGetProductById.ExecuteReader();
 
@@ -86,6 +86,7 @@ namespace Service.Data
                         product.AmountOnStock = productReader.GetInt32(productReader.GetOrdinal("amountOnStock"));
                         product.Brand = productReader.GetString(productReader.GetOrdinal("brand"));
                         product.Category = productReader.GetString(productReader.GetOrdinal("category"));
+                        product.rowId = (byte[])productReader["rowId"];
                     }
                     return product;
                 }
@@ -124,43 +125,24 @@ namespace Service.Data
         public int UpdateProduct(ServiceProduct product)
         {
             int rowsAffected = -1;
-            for (int i = 0; i < 5; i++)
-            {
                 using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
                     connection.Open();
                     using (SqlCommand cmdUpdateProduct = connection.CreateCommand())
                     {
-                        byte[] rowId = null;
-                        cmdUpdateProduct.CommandText = "SELECT rowID FROM Product WHERE productId = @productId";
-                        cmdUpdateProduct.Parameters.AddWithValue("productId", product.ProductId);
-                        SqlDataReader reader = cmdUpdateProduct.ExecuteReader();
-
-                        while (reader.Read())
-                        {
-                            rowId = (byte[])reader["rowId"];
-                        }
-                        reader.Close();
-
-                        cmdUpdateProduct.CommandText = "UPDATE Product SET name = @name, price = @price, description = @description, brand = @brand, amountOnStock = @amountOnStock WHERE productId = @productIdd AND rowID = @rowId";
+                        cmdUpdateProduct.CommandText = "UPDATE Product SET name = @name, price = @price, description = @description, brand = @brand, amountOnStock = @amountOnStock WHERE productId = @productId AND rowID = @rowId";
                         cmdUpdateProduct.Parameters.AddWithValue("name", product.Name);
                         cmdUpdateProduct.Parameters.AddWithValue("price", product.Price);
                         cmdUpdateProduct.Parameters.AddWithValue("description", product.Description);
-                        cmdUpdateProduct.Parameters.AddWithValue("productIdd", product.ProductId);
+                        cmdUpdateProduct.Parameters.AddWithValue("productId", product.ProductId);
                         cmdUpdateProduct.Parameters.AddWithValue("brand", product.Brand);
                         cmdUpdateProduct.Parameters.AddWithValue("amountOnStock", product.AmountOnStock);
-                        cmdUpdateProduct.Parameters.AddWithValue("rowId", rowId);
-
+                        cmdUpdateProduct.Parameters.AddWithValue("rowId", product.rowId);
                         rowsAffected = cmdUpdateProduct.ExecuteNonQuery();
 
-                        if(rowsAffected != 0)
-                        {
-                            break;
-                        }
                     }
                 }
                 
-            }
             return rowsAffected;
         }
     }
