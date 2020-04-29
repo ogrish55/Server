@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace Service.Data
 {
-    public class DataProduct : IDataProduct
+    public class DataProduct
     {
         private string _connectionString;
         public DataProduct()

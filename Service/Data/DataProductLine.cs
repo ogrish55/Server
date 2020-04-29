@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Service.Data
 {
-    public class DataProductLine : IDataProductLine
+    public class DataProductLine
     {
         private string _connectionString;
         public DataProductLine()

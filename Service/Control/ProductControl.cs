@@ -10,7 +10,7 @@ namespace Service.Control
 {
     public class ProductControl
     {
-        IDataProduct dataProduct;
+        DataProduct dataProduct;
         public ProductControl()
         {
             dataProduct = new DataProduct();

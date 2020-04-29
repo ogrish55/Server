@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Service.Data
 {
-    public class DataDeliveryDescription : IDataDeliveryDescription
+    public class DataDeliveryDescription
     {
         private string _connectionString;
         public DataDeliveryDescription()

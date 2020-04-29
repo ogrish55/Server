@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace Service.Data
 {
-    public class DataDiscount : IDataDiscount
+    public class DataDiscount
     {
         private string _connectionString;
         public DataDiscount()
