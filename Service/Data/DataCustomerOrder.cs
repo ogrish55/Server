@@ -263,16 +263,24 @@ namespace Service.Data
                             dataProductLine.InsertProductLine(item);
 
                             // Retrieve product from DB and read amountOnStock
-                            ServiceProduct productFromDB = dataProduct.GetProductById(item.Product.ProductId);
-                            int remainingAmountOnStock = productFromDB.AmountOnStock - item.Amount;
-                            if (remainingAmountOnStock < 0)
+
+                            for (int i = 0; i < 5; i++)
                             {
-                                throw new TransactionAbortedException();
-                            }
-                            else
-                            {
-                                productFromDB.AmountOnStock = remainingAmountOnStock;
-                                dataProduct.UpdateProduct(productFromDB);
+                                ServiceProduct productFromDB = dataProduct.GetProductById(item.Product.ProductId);
+                                int remainingAmountOnStock = productFromDB.AmountOnStock - item.Amount;
+                                if (remainingAmountOnStock < 0)
+                                {
+                                    throw new TransactionAbortedException();
+                                }
+                                else
+                                {
+                                    productFromDB.AmountOnStock = remainingAmountOnStock;
+                                    int affectedRows = dataProduct.UpdateProduct(productFromDB);
+                                    if(affectedRows != 0)
+                                    {
+                                        break;
+                                    }
+                                }
                             }
 
                         }
