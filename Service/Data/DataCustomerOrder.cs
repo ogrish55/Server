@@ -193,12 +193,6 @@ namespace Service.Data
                         cmdInsertOrder.Parameters.AddWithValue("paymentMethodId", order.PaymentMethod);
                         orderId = (int)cmdInsertOrder.ExecuteScalar();
                         
-                        //If DiscountCode is present, then add row in DiscountOrder
-                    if(order.DiscountCode != null)
-                    {
-                        InsertDiscountOrder(orderId, order.DiscountCode);
-                    }
-                        
                 }
                 return orderId;
             }
@@ -255,14 +249,17 @@ namespace Service.Data
                         int orderID = InsertOrder(order);
                         order.OrderId = orderID;
 
+                        if (order.DiscountCode != null)
+                        {
+                            InsertDiscountOrder(orderID, order.DiscountCode);
+                        }
+
                         decimal totalPrice = -1;
                         foreach (var item in order.ShoppingCart)
                         {
                             item.OrderId = orderID;
                             totalPrice += item.SubTotal;
                             dataProductLine.InsertProductLine(item);
-
-                            // Retrieve product from DB and read amountOnStock
 
                             for (int i = 0; i < 5; i++)
                             {
