@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Service.Data
 {
-    public class DataCustomer : IDataCustomer
+    public class DataCustomer
     {
         private string _connectionString;
         public DataCustomer()

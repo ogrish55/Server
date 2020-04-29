@@ -71,13 +71,6 @@
     <Compile Include="Data\DataProduct.cs" />
     <Compile Include="Data\DataProductLine.cs" />
     <Compile Include="Data\DataReview.cs" />
-    <Compile Include="Data\IDataCustomer.cs" />
-    <Compile Include="Data\IDataCustomerOrder.cs" />
-    <Compile Include="Data\IDataDiscount.cs" />
-    <Compile Include="Data\IDataDeliveryDescription.cs" />
-    <Compile Include="Data\IDataProduct.cs" />
-    <Compile Include="Data\IDataProductLine.cs" />
-    <Compile Include="Data\IDataReview.cs" />
     <Compile Include="Model\ServicePaymentMethod.cs" />
     <Compile Include="Model\ServiceCustomer.cs" />
     <Compile Include="Model\ServiceCustomerOrder.cs" />

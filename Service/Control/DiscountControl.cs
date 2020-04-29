@@ -5,7 +5,7 @@ namespace Service.Control
 {
     public class DiscountControl
     {
-        IDataDiscount dataDiscount;
+        DataDiscount dataDiscount;
 
         public DiscountControl()
         {

@@ -7,7 +7,7 @@ using System.Transactions;
 
 namespace Service.Data
 {
-    public class DataCustomerOrder : IDataCustomerOrder
+    public class DataCustomerOrder
     {
         private string _connectionString;
         private DataCustomer dataCustomer;

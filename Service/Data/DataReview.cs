@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace Service.Data
 {
-    public class DataReview : IDataReview
+    public class DataReview
     {
         private string _connectionString;
         public DataReview()

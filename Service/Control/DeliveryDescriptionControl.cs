@@ -10,7 +10,7 @@ namespace Service.Control
 {
     public class DeliveryDescriptionControl
     {
-        IDataDeliveryDescription dataDeliveryDescription;
+        DataDeliveryDescription dataDeliveryDescription;
         public DeliveryDescriptionControl()
         {
             dataDeliveryDescription = new DataDeliveryDescription();

@@ -10,7 +10,7 @@ namespace Service.Control
 {
     public class ProductLineControl
     {
-        IDataProductLine dataProductLine;
+        DataProductLine dataProductLine;
 
         public ProductLineControl()
         {

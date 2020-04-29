@@ -10,7 +10,7 @@ namespace Service.Control
 {
     public class CustomerControl
     {
-        IDataCustomer dataCustomer;
+        DataCustomer dataCustomer;
         public CustomerControl()
         {
             dataCustomer = new DataCustomer();
