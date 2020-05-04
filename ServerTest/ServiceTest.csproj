@@ -54,6 +54,7 @@
     <Compile Include="DataDeliveryDescriptionTest.cs" />
     <Compile Include="DataPaymentMethodTest.cs" />
     <Compile Include="DataProductTest.cs" />
+    <Compile Include="InsertOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CancelOrderTest.cs" />
     <Compile Include="DiscountTest.cs" />
