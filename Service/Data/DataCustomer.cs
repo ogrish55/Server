@@ -41,16 +41,48 @@ namespace Service.Data
                 connection.Open();
                 using (SqlCommand cmdInsertCustomer = connection.CreateCommand())
                 {
-                    cmdInsertCustomer.CommandText = "INSERT INTO Customer (name, address, zipCode, phoneNo) OUTPUT INSERTED.customerId VALUES (@name, @address, @zipCode, @phoneNo)";
+                    cmdInsertCustomer.CommandText = "INSERT INTO Customer (name, address, zipCode, phoneNo, passwordHash, salt, email) OUTPUT INSERTED.customerId VALUES (@name, @address, @zipCode, @phoneNo, @passwordHash, @salt, @email)";
                     cmdInsertCustomer.Parameters.AddWithValue("name", customer.Name);
                     cmdInsertCustomer.Parameters.AddWithValue("address", customer.Address);
                     cmdInsertCustomer.Parameters.AddWithValue("zipCode", customer.ZipCode);
                     cmdInsertCustomer.Parameters.AddWithValue("phoneNo", customer.PhoneNo);
+                    cmdInsertCustomer.Parameters.AddWithValue("passwordHash", customer.Hash);
+                    cmdInsertCustomer.Parameters.AddWithValue("salt", customer.Salt);
+                    cmdInsertCustomer.Parameters.AddWithValue("email", customer.Email);
 
                     insertedId = (int)cmdInsertCustomer.ExecuteScalar();
                 }
             }
             return insertedId;
+        }
+
+        public ServiceCustomer GetCustomerByEmail(string email)
+        {
+            ServiceCustomer serviceCustomer = null;
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmdGetCustomerByEmail = connection.CreateCommand())
+                {
+                    cmdGetCustomerByEmail.CommandText = "SELECT customerId, name, address, zipCode, phoneNo, passwordHash, salt, email WHERE email = @email";
+                    cmdGetCustomerByEmail.Parameters.AddWithValue("email", email);
+
+                    SqlDataReader customerReader = cmdGetCustomerByEmail.ExecuteReader();
+                    if (customerReader.Read())
+                    {
+                        serviceCustomer = new ServiceCustomer();
+                        serviceCustomer.CustomerId = customerReader.GetInt32(customerReader.GetOrdinal("customerId"));
+                        serviceCustomer.Name = customerReader.GetString(customerReader.GetOrdinal("name"));
+                        serviceCustomer.Address = customerReader.GetString(customerReader.GetOrdinal("address"));
+                        serviceCustomer.ZipCode = customerReader.GetInt32(customerReader.GetOrdinal("zipCode"));
+                        serviceCustomer.PhoneNo = customerReader.GetInt32(customerReader.GetOrdinal("phoneNo"));
+                        serviceCustomer.Hash = customerReader.GetString(customerReader.GetOrdinal("passwordHash"));
+                        serviceCustomer.Salt = customerReader.GetString(customerReader.GetOrdinal("salt"));
+                        serviceCustomer.Email = customerReader.GetString(customerReader.GetOrdinal("email"));
+                    }
+                }
+            }
+            return serviceCustomer;
         }
 
         public int UpdateCustomer(ServiceCustomer customer)

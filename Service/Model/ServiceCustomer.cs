@@ -20,5 +20,13 @@ namespace Service.Model
         public int ZipCode { get; set; }
         [DataMember]
         public int PhoneNo { get; set; }
+        [DataMember]
+        public string Hash { get; set; }
+        [DataMember]
+        public string Salt { get; set; }
+        [DataMember]
+        public string Password { get; set; }
+        [DataMember]
+        public string Email { get; set; }
     }
 }

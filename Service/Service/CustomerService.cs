@@ -21,6 +21,7 @@ namespace Service
             customerControl.DeleteCustomer(customerId);
         }
 
+
         public int InsertCustomer(ServiceCustomer customer)
         {
           return customerControl.InsertCustomer(customer);
@@ -29,6 +30,11 @@ namespace Service
         public void UpdateCustomer(ServiceCustomer customer)
         {
             customerControl.UpdateCustomer(customer);
+        }
+
+        public bool VerifyPassword(string enteredPassword, string storedHash, string storedSalt)
+        {
+           return customerControl.VerifyPassword(enteredPassword, storedHash, storedSalt);
         }
     }
 }
