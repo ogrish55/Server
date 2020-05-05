@@ -19,6 +19,6 @@ namespace Service
         [OperationContract]
         void DeleteCustomer(int customerId);
         [OperationContract]
-        bool VerifyPassword(string enteredPassword, string storedHash, string storedSalt);
+        ServiceCustomer VerifyLogin(string enteredPassword, string email);
     }
 }
