@@ -114,7 +114,10 @@ namespace Service.Data
                     {
                         cmdInsertProduct.Parameters.AddWithValue("brand", product.Brand);
                     }
-                    cmdInsertProduct.Parameters.AddWithValue("category", "NO_CATEGORY");
+                    if (product.Category == null)
+                    {
+                        cmdInsertProduct.Parameters.AddWithValue("category", "NO_CATEGORY");
+                    }
 
                     insertedId = (int)cmdInsertProduct.ExecuteScalar();
                 }
@@ -125,24 +128,25 @@ namespace Service.Data
         public int UpdateProduct(ServiceProduct product)
         {
             int rowsAffected = -1;
-                using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmdUpdateProduct = connection.CreateCommand())
                 {
-                    connection.Open();
-                    using (SqlCommand cmdUpdateProduct = connection.CreateCommand())
-                    {
-                        cmdUpdateProduct.CommandText = "UPDATE Product SET name = @name, price = @price, description = @description, brand = @brand, amountOnStock = @amountOnStock WHERE productId = @productId AND rowID = @rowId";
-                        cmdUpdateProduct.Parameters.AddWithValue("name", product.Name);
-                        cmdUpdateProduct.Parameters.AddWithValue("price", product.Price);
-                        cmdUpdateProduct.Parameters.AddWithValue("description", product.Description);
-                        cmdUpdateProduct.Parameters.AddWithValue("productId", product.ProductId);
-                        cmdUpdateProduct.Parameters.AddWithValue("brand", product.Brand);
-                        cmdUpdateProduct.Parameters.AddWithValue("amountOnStock", product.AmountOnStock);
-                        cmdUpdateProduct.Parameters.AddWithValue("rowId", product.rowId);
-                        rowsAffected = cmdUpdateProduct.ExecuteNonQuery();
+                    cmdUpdateProduct.CommandText = "UPDATE Product SET name = @name, price = @price, description = @description, brand = @brand, amountOnStock = @amountOnStock, category = @category WHERE productId = @productId AND rowID = @rowId";
+                    cmdUpdateProduct.Parameters.AddWithValue("name", product.Name);
+                    cmdUpdateProduct.Parameters.AddWithValue("price", product.Price);
+                    cmdUpdateProduct.Parameters.AddWithValue("description", product.Description);
+                    cmdUpdateProduct.Parameters.AddWithValue("productId", product.ProductId);
+                    cmdUpdateProduct.Parameters.AddWithValue("brand", product.Brand);
+                    cmdUpdateProduct.Parameters.AddWithValue("amountOnStock", product.AmountOnStock);
+                    cmdUpdateProduct.Parameters.AddWithValue("rowId", product.rowId);
+                    cmdUpdateProduct.Parameters.AddWithValue("category", product.Category);
+                    rowsAffected = cmdUpdateProduct.ExecuteNonQuery();
 
-                    }
                 }
-                
+            }
+
             return rowsAffected;
         }
     }

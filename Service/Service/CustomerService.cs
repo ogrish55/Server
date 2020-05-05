@@ -21,14 +21,20 @@ namespace Service
             customerControl.DeleteCustomer(customerId);
         }
 
+
         public int InsertCustomer(ServiceCustomer customer)
         {
-          return customerControl.InsertCustomer(customer);
+            return customerControl.InsertCustomer(customer);
         }
 
         public void UpdateCustomer(ServiceCustomer customer)
         {
             customerControl.UpdateCustomer(customer);
+        }
+
+        public ServiceCustomer VerifyLogin(string enteredPassword, string email)
+        {
+            return customerControl.VerifyLogin(enteredPassword, email);
         }
     }
 }
