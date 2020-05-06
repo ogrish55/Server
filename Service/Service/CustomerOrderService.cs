@@ -96,9 +96,9 @@ namespace Service
             customerOrderControl.UpdateOrder(order);
         }
 
-        public bool FinishCheckout(ServiceCustomer customer, ServiceCustomerOrder order)
+        public bool FinishCheckout(ServiceCustomerOrder order)
         {
-            return customerOrderControl.finishCheckout(customer, order);
+            return customerOrderControl.finishCheckout( order);
         }
     }
 }

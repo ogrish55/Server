@@ -19,7 +19,7 @@ namespace Service.Model
         [DataMember]
         public int ZipCode { get; set; }
         [DataMember]
-        public int PhoneNo { get; set; }
+        public string PhoneNo { get; set; }
         [DataMember]
         public string Hash { get; set; }
         [DataMember]

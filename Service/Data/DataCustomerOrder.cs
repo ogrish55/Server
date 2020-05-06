@@ -235,7 +235,7 @@ namespace Service.Data
             return rowsAffected;
         }
 
-        public bool FinishCheckout(ServiceCustomer customer, ServiceCustomerOrder order)
+        public bool FinishCheckout(ServiceCustomerOrder order)
         {
             bool success = false;
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -245,8 +245,6 @@ namespace Service.Data
                 {
                     using (TransactionScope scope = new TransactionScope())
                     {
-                        int customerID = dataCustomer.InsertCustomer(customer);
-                        order.CustomerId = customerID;
                         int orderID = InsertOrder(order);
                         order.OrderId = orderID;
 

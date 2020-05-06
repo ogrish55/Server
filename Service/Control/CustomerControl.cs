@@ -75,5 +75,10 @@ namespace Service.Control
             var rfc2898DeriveBytes = new Rfc2898DeriveBytes(enteredPassword, saltBytes, 30000);
             return Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256)) == storedHash;
         }
+
+        public ServiceCustomer GetCustomer(int id)
+        {
+            return dataCustomer.GetCustomerById(id);
+        }
     }
 }

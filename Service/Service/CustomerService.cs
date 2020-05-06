@@ -21,6 +21,10 @@ namespace Service
             customerControl.DeleteCustomer(customerId);
         }
 
+        public ServiceCustomer GetCustomer(int id)
+        {
+            return customerControl.GetCustomer(id);
+        }
 
         public int InsertCustomer(ServiceCustomer customer)
         {
