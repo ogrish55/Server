@@ -64,7 +64,7 @@ namespace Service.Data
                 connection.Open();
                 using (SqlCommand cmdGetCustomerByEmail = connection.CreateCommand())
                 {
-                    cmdGetCustomerByEmail.CommandText = "SELECT customerId, name, address, zipCode, phoneNo, passwordHash, salt, email WHERE email = @email";
+                    cmdGetCustomerByEmail.CommandText = "SELECT customerId, name, address, zipCode, phoneNo, passwordHash, salt, email FROM Customer WHERE email = @email";
                     cmdGetCustomerByEmail.Parameters.AddWithValue("email", email);
 
                     SqlDataReader customerReader = cmdGetCustomerByEmail.ExecuteReader();
@@ -75,7 +75,36 @@ namespace Service.Data
                         serviceCustomer.Name = customerReader.GetString(customerReader.GetOrdinal("name"));
                         serviceCustomer.Address = customerReader.GetString(customerReader.GetOrdinal("address"));
                         serviceCustomer.ZipCode = customerReader.GetInt32(customerReader.GetOrdinal("zipCode"));
-                        serviceCustomer.PhoneNo = customerReader.GetInt32(customerReader.GetOrdinal("phoneNo"));
+                        serviceCustomer.PhoneNo = customerReader.GetString(customerReader.GetOrdinal("phoneNo"));
+                        serviceCustomer.Hash = customerReader.GetString(customerReader.GetOrdinal("passwordHash"));
+                        serviceCustomer.Salt = customerReader.GetString(customerReader.GetOrdinal("salt"));
+                        serviceCustomer.Email = customerReader.GetString(customerReader.GetOrdinal("email"));
+                    }
+                }
+            }
+            return serviceCustomer;
+        }
+
+        public ServiceCustomer GetCustomerById(int id)
+        {
+            ServiceCustomer serviceCustomer = null;
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmdGetCustomerByEmail = connection.CreateCommand())
+                {
+                    cmdGetCustomerByEmail.CommandText = "SELECT customerId, name, address, zipCode, phoneNo, passwordHash, salt, email FROM Customer WHERE customerId = @CustomerIDD";
+                    cmdGetCustomerByEmail.Parameters.AddWithValue("CustomerIDD", id);
+
+                    SqlDataReader customerReader = cmdGetCustomerByEmail.ExecuteReader();
+                    if (customerReader.Read())
+                    {
+                        serviceCustomer = new ServiceCustomer();
+                        serviceCustomer.CustomerId = customerReader.GetInt32(customerReader.GetOrdinal("customerId"));
+                        serviceCustomer.Name = customerReader.GetString(customerReader.GetOrdinal("name"));
+                        serviceCustomer.Address = customerReader.GetString(customerReader.GetOrdinal("address"));
+                        serviceCustomer.ZipCode = customerReader.GetInt32(customerReader.GetOrdinal("zipCode"));
+                        serviceCustomer.PhoneNo = customerReader.GetString(customerReader.GetOrdinal("phoneNo"));
                         serviceCustomer.Hash = customerReader.GetString(customerReader.GetOrdinal("passwordHash"));
                         serviceCustomer.Salt = customerReader.GetString(customerReader.GetOrdinal("salt"));
                         serviceCustomer.Email = customerReader.GetString(customerReader.GetOrdinal("email"));

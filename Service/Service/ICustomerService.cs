@@ -20,5 +20,7 @@ namespace Service
         void DeleteCustomer(int customerId);
         [OperationContract]
         ServiceCustomer VerifyLogin(string enteredPassword, string email);
+        [OperationContract]
+        ServiceCustomer GetCustomer(int id);
     }
 }

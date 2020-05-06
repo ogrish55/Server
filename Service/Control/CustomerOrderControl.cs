@@ -16,9 +16,9 @@ namespace Service.Control
             dataCustomerOrder = new DataCustomerOrder();
         }
 
-        public bool finishCheckout(ServiceCustomer customer, ServiceCustomerOrder order)
+        public bool finishCheckout(ServiceCustomerOrder order)
         {
-            return dataCustomerOrder.FinishCheckout(customer, order);
+            return dataCustomerOrder.FinishCheckout(order);
         }
 
         public void DeleteOrder(int orderId)

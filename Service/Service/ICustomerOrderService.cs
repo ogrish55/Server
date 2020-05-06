@@ -54,7 +54,7 @@ namespace Service
         IEnumerable<ServicePaymentMethod> GetPaymentMethods();
 
         [OperationContract]
-        bool FinishCheckout(ServiceCustomer customer, ServiceCustomerOrder order);
+        bool FinishCheckout(ServiceCustomerOrder order);
 
     }
 }
