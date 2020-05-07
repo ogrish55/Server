@@ -79,6 +79,7 @@ namespace Service.Data
                         serviceCustomer.Hash = customerReader.GetString(customerReader.GetOrdinal("passwordHash"));
                         serviceCustomer.Salt = customerReader.GetString(customerReader.GetOrdinal("salt"));
                         serviceCustomer.Email = customerReader.GetString(customerReader.GetOrdinal("email"));
+                        serviceCustomer.City = GetCityFromZipCode(serviceCustomer.ZipCode);
                     }
                 }
             }
@@ -108,6 +109,7 @@ namespace Service.Data
                         serviceCustomer.Hash = customerReader.GetString(customerReader.GetOrdinal("passwordHash"));
                         serviceCustomer.Salt = customerReader.GetString(customerReader.GetOrdinal("salt"));
                         serviceCustomer.Email = customerReader.GetString(customerReader.GetOrdinal("email"));
+                        serviceCustomer.City = GetCityFromZipCode(serviceCustomer.ZipCode);
                     }
                 }
             }
@@ -131,6 +133,29 @@ namespace Service.Data
                 }
             }
             return rowsAffected;
+        }
+
+        public string GetCityFromZipCode(int zipCode)
+        {
+            string city = string.Empty;
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                using(SqlCommand cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = "Select city from ZipCity where zipCode = @zipCode";
+                    cmd.Parameters.AddWithValue("zipCode", zipCode);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        city = reader.GetString(reader.GetOrdinal("city"));
+                    }
+                }
+            }
+
+            return city;
+
         }
     }
 }

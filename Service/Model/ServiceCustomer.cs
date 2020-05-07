@@ -28,5 +28,7 @@ namespace Service.Model
         public string Password { get; set; }
         [DataMember]
         public string Email { get; set; }
+        [DataMember]
+        public string City { get; set; }
     }
 }
