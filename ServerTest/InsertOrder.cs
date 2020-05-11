@@ -24,7 +24,7 @@ namespace ServiceTest
             customer.Name = "Peter J.";
             customer.Address = "Sofiendalsvej";
             customer.ZipCode = 9000;
-            customer.PhoneNo = 12345678;
+            customer.PhoneNo = "12345678";
 
             ServiceProduct product = new ServiceProduct();
             product = dataProduct.GetProductById(4);
@@ -45,7 +45,7 @@ namespace ServiceTest
             order.ShoppingCart = productLines;
 
             //Act
-            bool success = dataCustomerOrder.FinishCheckout(customer, order);
+            bool success = dataCustomerOrder.FinishCheckout(order);
 
 
             //Assert

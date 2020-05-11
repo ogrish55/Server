@@ -15,6 +15,18 @@ namespace Service
             productControl = new ProductControl();
         }
 
+        public IEnumerable<ServiceCategory> GetAllCategories() 
+        {
+            CategoryControl categoryControl = new CategoryControl();
+            return categoryControl.GetAllCategories();
+        }
+
+        public IEnumerable<ServiceBrand> GetAllBrands()
+        {
+            BrandControl brandControl = new BrandControl();
+            return brandControl.GetAllBrands();
+        }
+
         public void DeleteProduct(int productId)
         {
             productControl.DeleteProduct(productId);

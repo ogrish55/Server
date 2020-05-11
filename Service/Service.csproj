@@ -57,6 +57,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Control\BrandControl.cs" />
+    <Compile Include="Control\CategoryControl.cs" />
     <Compile Include="Control\CustomerControl.cs" />
     <Compile Include="Control\CustomerOrderControl.cs" />
     <Compile Include="Control\DiscountControl.cs" />
@@ -64,6 +66,8 @@
     <Compile Include="Control\ProductControl.cs" />
     <Compile Include="Control\ProductLineControl.cs" />
     <Compile Include="Control\ReviewControl.cs" />
+    <Compile Include="Data\DataBrand.cs" />
+    <Compile Include="Data\DataCategory.cs" />
     <Compile Include="Data\DataCustomer.cs" />
     <Compile Include="Data\DataCustomerOrder.cs" />
     <Compile Include="Data\DataDiscount.cs" />
@@ -71,6 +75,8 @@
     <Compile Include="Data\DataProduct.cs" />
     <Compile Include="Data\DataProductLine.cs" />
     <Compile Include="Data\DataReview.cs" />
+    <Compile Include="Model\ServiceBrand.cs" />
+    <Compile Include="Model\ServiceCategory.cs" />
     <Compile Include="Model\ServicePaymentMethod.cs" />
     <Compile Include="Model\ServiceCustomer.cs" />
     <Compile Include="Model\ServiceCustomerOrder.cs" />

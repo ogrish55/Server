@@ -21,14 +21,14 @@ namespace Service.Model
         [DataMember]
         public int AmountOnStock { get; set; }
         [DataMember]
-        public string Brand { get; set; }
+        public int BrandId { get; set; }
         [DataMember]
-        public string Category { get; set; }
+        public int CategoryId { get; set; }
         public override string ToString()
         {
             return $"{ProductId} {Name} {Price} ({Description})";
         }
-
+        [DataMember]
         public byte[] rowId;
     }
 }
