@@ -12,6 +12,12 @@ namespace Service
     public interface IProductLineService
     {
         [OperationContract]
+        IEnumerable<ServiceCategory> GetAllCategories();
+
+        [OperationContract]
+        IEnumerable<ServiceBrand> GetAllBrands();
+
+        [OperationContract]
         void DeleteProductLine(int productLineId);
 
         [OperationContract]
