@@ -54,6 +54,7 @@ namespace Service.Data
                 }
             }
             return insertedId;
+            //This is a comment used for the report in systemudvikling.
         }
 
         public ServiceCustomer GetCustomerByEmail(string email)
